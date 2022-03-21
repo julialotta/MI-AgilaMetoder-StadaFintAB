@@ -1,0 +1,37 @@
+.mypage-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .header-div {
+  }
+
+  .table-wrapper {
+    display: flex;
+    width: 638px;
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px;
+      font-size: 1.2em;
+      thead > tr {
+        text-align: left;
+      }
+      thead > tr > th {
+        padding-left: 15px;
+        padding-bottom: 15px;
+        width: 25%;
+      }
+      tbody > tr {
+        border-bottom: 1px solid #c4c4c4;
+      }
+      tbody > tr > td {
+        padding: 15px;
+        width: 25%;
+      }
+    }
+  }
+  .logout-div {
+  }
+}
