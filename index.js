@@ -5,6 +5,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const loginroutes = require("./routes/login-routes");
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use(express.static("public"));
 app.get("/", async (req, res) => {
   res.render("home");
 });
+
+app.use("/users", loginroutes);
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");
