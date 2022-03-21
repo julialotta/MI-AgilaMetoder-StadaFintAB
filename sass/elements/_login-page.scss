@@ -37,7 +37,8 @@
         }
 
         .form-btn{
-            @include mixins.btn(120px, 12px, 35px)
+            @include mixins.btn(120px, 12px, 35px);
+            margin-bottom: 20px;
         }
       }
     }
