@@ -34,7 +34,6 @@ router.post("/register", async (req, res) => {
       });
       console.log(newUser);
       if (utils.validateUser(newUser)) {
-        console.log("saved user woho");
         await newUser.save();
         UsersModel.findOne({ name }, (err, user) => {
           const userData = { userId: user._id, name };
