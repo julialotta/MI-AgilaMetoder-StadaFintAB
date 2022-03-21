@@ -1,0 +1,28 @@
+<div class="bookings-container">
+    <h1 class="bookings-header">Book a cleaning</h1>
+    <div class="bookings-content">
+        <form action="/customer/book-cleaning" method="post" class="bookings-form">
+            <p class="error-message">{{errorMessage}}</p>
+            <section class="bookings-section">
+                <p class="bookings-subheader">Date</p>
+                <input type="date" name="date">
+            </section>
+            <section class="bookings-section">
+                <p class="bookings-subheader">Time</p>
+                <div class="radio">
+                    <input type="radio" id="time1" name="time" value="time1">
+                    <label for="time1">09:00 AM – 12:00 PM</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="time2" name="time" value="time2">
+                    <label for="time2">12:00 PM – 15:00 PM</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="time3" name="time" value="time3">
+                    <label for="time2">15:00 PM – 18:00 PM</label>
+                </div>
+            </section>
+            <input type="submit" value="Check availability">
+        </form>
+    </div>
+</div>

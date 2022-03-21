@@ -23,3 +23,29 @@
     @content;
   }
 }
+////////////
+//FLEXBOX//
+//////////
+@mixin flex($dir, $jc, $ai, $gap: 0) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc;
+  align-items: $ai;
+  gap: $gap;
+}
+
+///////////
+//BUTTON//
+/////////
+@mixin btn($width, $radius: 20, $height: 35){
+  //Lägg in rätt font
+  background-color: #AD6767; //Lägg in variabelfärg
+  color: white;
+  border-radius: $radius;
+  width: $width;
+  height: $height;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
