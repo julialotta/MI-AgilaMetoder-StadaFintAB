@@ -1,12 +1,30 @@
 .bookings-container {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+    margin: 0 auto;
+
+    @include for-tablet-landscape-up {
+        width: 40%;
+        padding: 20px;
+    }
 
     @include for-desktop-up {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
-        margin: 0 auto;
+        width: 40%;
+        padding: 20px;
+    }
+
+    .bookings-content {
+        width: 100%;
+
+        @include for-desktop-up {
+            width: unset;
+        }
     }
 
     .bookings-header {
@@ -16,13 +34,26 @@
         }
     }
 
-    .bookings-form {
-
-        @include for-desktop-up {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
+    .bookings-subheader {
+        padding: 0;
+        margin: 0;
+        font-weight: bold;
+        padding: 10px 0px;
     }
+
+    .bookings-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .radio {
+        padding: 5px 0px;
+    }
+
+    input[type=submit] {
+        padding: 5px;
+        margin: 10px 0px;
+    }
+
+
 }
