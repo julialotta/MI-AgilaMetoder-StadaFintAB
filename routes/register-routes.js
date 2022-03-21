@@ -4,24 +4,24 @@ const jwt = require("jsonwebtoken");
 const UsersModel = require("../models/UsersModel.js");
 const utils = require("../utils");
 
-router.get("/register", async (req, res) => {
-  res.render("users/register");
+router.get("/", async (req, res) => {
+  res.render("register");
 });
 
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   const { email, name, adress, phone, password, confirmPassword } = req.body;
 
   UsersModel.findOne({ email }, async (err, user) => {
     if (user) {
-      res.render("users/register", {
+      res.render("register", {
         error: "Seems like this email already have an account",
       });
     } else if (password.length <= 4) {
-      res.render("users/register", {
+      res.render("register", {
         error: "Your password must have at least 5 characters",
       });
     } else if (password !== confirmPassword) {
-      res.render("users/register", {
+      res.render("register", {
         error: "Passwords don't match",
       });
     } else {
@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
           res.redirect("/");
         });
       } else {
-        res.render("users/register", {
+        res.render("register", {
           error: "You have to enter some data",
         });
       }
