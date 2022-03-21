@@ -5,15 +5,17 @@
 
   h2 {
     font-family: $fat-font;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    padding-top: 70px;
   }
 
   .table-wrapper {
-    width: 638px;
+    width: 400px;
     .styled-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 25px;
+      margin-bottom: 40px;
+      margin-top: 30px;
       font-size: 1em;
       thead > tr {
         text-align: left;
@@ -29,6 +31,7 @@
       }
       tbody > tr > td {
         font-family: $skinny-font;
+        font-size: 0.9em;
         padding: 15px;
         width: 25%;
       }
@@ -36,7 +39,18 @@
   }
   .logout-div {
     form > input {
-      @include mixins.btn(300, 10px, 40);
+      @include mixins.btn(300, 10px, 50);
+    }
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .mypage-wrapper {
+    .table-wrapper {
+      width: 638px;
+      .styled-table {
+        font-size: 1.2em;
+      }
     }
   }
 }
