@@ -1,0 +1,28 @@
+.bookings-container {
+
+    @include for-desktop-up {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .bookings-header {
+
+        @include for-desktop-up {
+            font-size: 1.8rem;
+        }
+    }
+
+    .bookings-form {
+
+        @include for-desktop-up {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+    }
+}

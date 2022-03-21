@@ -1,0 +1,25 @@
+<div class="bookings-container">
+    <h1 class="bookings-header">Book a cleaning</h1>
+    <div class="bookings-content">
+        <form action="/bookings/{{_id}}" method="post" class="bookings-form">
+
+            <input type="date" name="date">
+            <div class="checkbox">
+                <input type="checkbox" id="timeslot1" name="time1" value="time1">
+                <label for="timeslot1">09:00 AM – 12:00 PM</label>
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" id="time2" name="time2" value="time2">
+                <label for="timeslot1">12:00 PM – 15:00 PM</label>
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" id="time3" name="time3" value="time3">
+                <label for="timeslot1">15:00 PM – 18:00 PM</label>
+            </div>
+            <input type="submit" value="Check availability">
+
+        </form>
+    </div>
+</div>

@@ -1,11 +1,11 @@
 require("dotenv").config();
-require("./mongoose");
+require("./mongoose.js");
 
 const express = require("express");
 const exphbs = require("express-handlebars");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-
+const bookingsRouter = require("./routes/bookings-routes.js");
 const app = express();
 
 app.engine(
@@ -25,6 +25,8 @@ app.use(express.static("public"));
 app.get("/", async (req, res) => {
   res.render("home");
 });
+
+app.use("/bookings", bookingsRouter);
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");
