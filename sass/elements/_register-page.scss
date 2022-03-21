@@ -1,12 +1,79 @@
-.registerContainer {
+@use "../mixins";
+
+.registerPage {
+  @include mixins.flex(column, start, center);
   background-color: $lightgrey;
-  height: 100vh;
+  min-height: 100vh;
 
-  h4 {
-    font-family: $fat-font;
-  }
+  ///////////////
+  // SECTIONS //
+  /////////////
+  &__section {
+    ///////////////////
+    // LOGO SECTION //
+    /////////////////
+    &--logo {
+      user-select: none;
+      width: clamp(130px, 20vw, 180px);
+      margin: 40px;
+      .clean-logo {
+        content: url("../assets/cleaninc-logo.svg");
+        width: 100%;
+        height: fit-content;
+      }
+    }
 
-  .registerFormContainer {
-    background-color: white;
+    &--form {
+      @include mixins.flex(column, start, center);
+      background-color: white;
+      border: 1.5px solid $grey;
+      border-radius: 5px;
+      width: 50%;
+      @include for-phone-landscape-up {
+        min-width: 600px;
+      }
+
+      form {
+        label {
+          font-size: 18px;
+        }
+        input {
+          font-size: 14px;
+          border: none;
+          border-bottom: 2px solid $grey;
+          padding: 3px;
+          margin: 10px 0;
+        }
+        ::placeholder {
+          color: $grey;
+        }
+        @include mixins.flex(column, center, center);
+
+        > div {
+          @include mixins.flex(column, center, center);
+          margin: 10px 0 40px 0;
+
+          @include for-phone-landscape-up {
+            @include mixins.flex(row, center, center);
+          }
+
+          > div {
+            font-family: $skinny-font;
+            margin: 0 30px;
+
+            @include mixins.flex(column, center, start);
+          }
+        }
+      }
+      h4 {
+        font-family: $fat-font;
+        font-weight: 800;
+        font-size: 24px;
+      }
+
+      .register-btn {
+        @include mixins.btn(120px, 12px, 35px);
+      }
+    }
   }
 }
