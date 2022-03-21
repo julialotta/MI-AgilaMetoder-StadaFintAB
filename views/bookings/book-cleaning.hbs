@@ -2,6 +2,7 @@
     <h1 class="bookings-header">Book a cleaning</h1>
     <div class="bookings-content">
         <form action="/bookings" method="post" class="bookings-form">
+            <p class="error-message">{{errorMessage}}</p>
             <section class="bookings-section">
                 <p class="bookings-subheader">Date</p>
                 <input type="date" name="date">

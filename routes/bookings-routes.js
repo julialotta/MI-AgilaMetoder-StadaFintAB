@@ -26,7 +26,10 @@ router.post("/", async (req, res) => {
   console.log(newBooking)
   res.render("bookings/book-cleaning");
 } else {
-  res.send("Form not filled out")
+  const errorMessage = "Oops! Did you forget to pick a date and time?"
+  res.render("bookings/book-cleaning", {
+    errorMessage
+  });
 }
 });
 

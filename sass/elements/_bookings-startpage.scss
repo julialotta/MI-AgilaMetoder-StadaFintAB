@@ -23,12 +23,20 @@
         width: 100%;
 
         @include for-desktop-up {
-            width: unset;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 
     .bookings-section {
         padding: 10px 0px;
+        padding: 10px 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .bookings-header {
@@ -48,6 +56,10 @@
     .bookings-form {
         display: flex;
         flex-direction: column;
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
     }
 
     .radio {
@@ -64,5 +76,10 @@
         margin: 5px 0px;
     }
 
+    .error-message {
+        padding: 0;
+        margin: 0;
+        color: rgb(243, 14, 14);
+    }
 
 }
