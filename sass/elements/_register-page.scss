@@ -26,26 +26,29 @@
     &--form {
       @include mixins.flex(column, start, center);
       background-color: white;
-      border: 1.5px solid $grey;
-      border-radius: 5px;
-      width: 50%;
+      border: 1.2px solid $grey;
+      border-radius: 6px;
+      width: 60%;
       @include for-phone-landscape-up {
         min-width: 600px;
       }
 
       form {
         label {
-          font-size: 18px;
+          font-family: $fat-font;
+          font-weight: bold;
         }
         input {
           font-size: 14px;
           border: none;
-          border-bottom: 2px solid $grey;
+          border-bottom: 1.2px solid $grey;
+          font-family: $skinny-font;
           padding: 3px;
           margin: 10px 0;
         }
         ::placeholder {
           color: $grey;
+          font-family: $skinny-font;
         }
         @include mixins.flex(column, center, center);
 
