@@ -1,0 +1,17 @@
+@import "variables";
+@import "mixins";
+
+@import "./elements/header.scss";
+@import "./elements/footer.scss";
+@import "./elements/profile-page-cleaner.scss";
+@import "./elements/profile-page-customer.scss";
+@import "./elements/main-page.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html  {
+  scroll-behavior: smooth;
+}

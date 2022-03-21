@@ -1,0 +1,30 @@
+{
+  "name": "mi-agilametoder-stadafintab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch sass/main.scss:public/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julialotta/MI-AgilaMetoder-StadaFintAB.git"
+  },
+  "author": "Malin Nilsson, Johanna Fryxell, Sofia Borg, Julia-Lotta Tinglöf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julialotta/MI-AgilaMetoder-StadaFintAB/issues"
+  },
+  "homepage": "https://github.com/julialotta/MI-AgilaMetoder-StadaFintAB#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.4.1",
+    "mongoose": "^6.2.7",
+    "sass": "^1.49.9"
+  }
+}
