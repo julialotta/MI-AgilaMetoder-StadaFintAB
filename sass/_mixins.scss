@@ -1,3 +1,4 @@
+@import "variables";
 // Mobile first - use below to code anything bigger:
 
 @mixin for-phone-landscape-up {
@@ -38,8 +39,8 @@
 //BUTTON//
 /////////
 @mixin btn($width, $radius: 20, $height: 35){
-  //Lägg in rätt font
-  background-color: #AD6767; //Lägg in variabelfärg
+  font-family: $fat-font;
+  background-color: $red; //Lägg in variabelfärg
   color: white;
   border-radius: $radius;
   width: $width;

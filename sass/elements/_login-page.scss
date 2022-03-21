@@ -15,7 +15,7 @@
     /////////////////
     &--logo {
       user-select: none;
-      width: clamp(130px, 20vw, 180px);
+      width: clamp(150px, 35vw, 180px);
       .clean-logo {
         content: url("../assets/cleaninc-logo.svg");
         width: 100%;
@@ -30,15 +30,43 @@
       border-radius: 6px;
       background-color: white;
 
-      .login-form{
-          @include mixins.flex(column, center, center, 1.2rem);
-        .form-input{
-            @include mixins.flex(column, center, flex-start, 0.2rem);
+      @include for-tablet-landscape-up {
+        max-width: 450px;
+      }
+
+      h2 {
+        font-family: $fat-font;
+      }
+
+      .login-form {
+        @include mixins.flex(column, center, center, 1.2rem);
+        .form-input {
+          @include mixins.flex(column, center, flex-start, 0.6rem);
+          input {
+            border: none;
+            border-bottom: 1.2px solid $grey;
+            font-family: $skinny-font;
+          }
+
+          label {
+            font-family: $fat-font;
+            font-weight: bold;
+          }
         }
 
-        .form-btn{
-            @include mixins.btn(120px, 12px, 35px);
-            margin-bottom: 20px;
+        .form-btn {
+          @include mixins.btn(120px, 12px, 35px);
+          margin-bottom: 20px;
+        }
+
+        .register {
+          width: 180px;
+          text-align: center;
+          a {
+            font-family: $skinny-font;
+            color: $grey;
+            text-decoration: none;
+          }
         }
       }
     }
