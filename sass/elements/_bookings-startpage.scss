@@ -27,6 +27,10 @@
         }
     }
 
+    .bookings-section {
+        padding: 10px 0px;
+    }
+
     .bookings-header {
 
         @include for-desktop-up {
@@ -38,7 +42,7 @@
         padding: 0;
         margin: 0;
         font-weight: bold;
-        padding: 10px 0px;
+
     }
 
     .bookings-form {
@@ -53,6 +57,11 @@
     input[type=submit] {
         padding: 5px;
         margin: 10px 0px;
+    }
+
+    input[type=date] {
+        padding: 5px 0px;
+        margin: 5px 0px;
     }
 
 
