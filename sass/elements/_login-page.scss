@@ -1,0 +1,46 @@
+@use "../mixins";
+
+.login-page {
+  @include mixins.flex(column, center, center, 2rem);
+
+  background-color: #f5f4f2;
+  height: 100vh;
+
+  ///////////////
+  // SECTIONS //
+  /////////////
+  &__section {
+    ///////////////////
+    // LOGO SECTION //
+    /////////////////
+    &--logo {
+      user-select: none;
+      width: clamp(130px, 20vw, 180px);
+      .clean-logo {
+        content: url("../assets/cleaninc-logo.svg");
+        width: 100%;
+        height: fit-content;
+      }
+    }
+
+    &--login {
+      @include mixins.flex(column, center, center, 1.125rem);
+      width: 60%;
+      border: 1.2px solid lightgray;
+      border-radius: 6px;
+      background-color: white;
+
+      .login-form{
+          @include mixins.flex(column, center, center, 1.2rem);
+        .form-input{
+            @include mixins.flex(column, center, flex-start, 0.2rem);
+        }
+
+        .form-btn{
+            @include mixins.btn(120px, 12px, 35px);
+            margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
