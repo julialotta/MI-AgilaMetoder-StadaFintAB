@@ -1,0 +1,34 @@
+<div class="mypage-wrapper">
+
+  <h2>Scheduled cleanings</h2>
+
+  <div class="table-wrapper">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Customer</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{! om bokninf finns, insert i td inuti tr }}
+        <tr>
+          <td>2021-02-02</td>
+          <td>kl 9</td>
+          <td>agda</td>
+          <td>stockholm</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="logout-div">
+    <form action="/cleaner/log-out" method="post">
+      <input type="submit" value="Log out" />
+    </form>
+  </div>
+
+</div>

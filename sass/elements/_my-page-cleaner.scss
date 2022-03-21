@@ -1,0 +1,42 @@
+@use "../mixins";
+
+.mypage-wrapper {
+  @include mixins.flex(column, center, center);
+
+  h2 {
+    font-family: $fat-font;
+    font-size: 1.2em;
+  }
+
+  .table-wrapper {
+    width: 638px;
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px;
+      font-size: 1em;
+      thead > tr {
+        text-align: left;
+      }
+      thead > tr > th {
+        font-family: $fat-font;
+        padding-left: 15px;
+        padding-bottom: 15px;
+        width: 25%;
+      }
+      tbody > tr {
+        border-bottom: 1px solid $grey;
+      }
+      tbody > tr > td {
+        font-family: $skinny-font;
+        padding: 15px;
+        width: 25%;
+      }
+    }
+  }
+  .logout-div {
+    form > input {
+      @include mixins.btn(300, 10px, 40);
+    }
+  }
+}
