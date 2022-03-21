@@ -4,12 +4,12 @@ const express = require("express");
 const router = express.Router();
 
 // GET - BOOK A CLEANING //
-router.get("/", (req, res) => {
-  res.render("bookings/book-cleaning");
+router.get("/book-cleaning", (req, res) => {
+  res.render("customer/book-cleaning");
 });
 
 // POST – BOOK A CLEANING //
-router.post("/", async (req, res) => {
+router.post("/book-cleaning", async (req, res) => {
   const { date, time } = req.body
 
   if(date && time) { 
@@ -24,10 +24,10 @@ router.post("/", async (req, res) => {
 
   await newBooking.save();
   console.log(newBooking)
-  res.render("bookings/book-cleaning");
+  res.render("customer/book-cleaning");
 } else {
   const errorMessage = "Oops! Did you forget to pick a date and time?"
-  res.render("bookings/book-cleaning", {
+  res.render("customer/book-cleaning", {
     errorMessage
   });
 }

@@ -14,52 +14,39 @@
         padding: 20px;
     }
 
-    @include for-desktop-up {
-        width: 40%;
-        padding: 20px;
-    }
-
     .bookings-content {
         width: 100%;
-
-        @include for-desktop-up {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .bookings-section {
-        padding: 10px 0px;
         padding: 10px 0px;
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-
-    .bookings-header {
-
-        @include for-desktop-up {
-            font-size: 1.8rem;
-        }
     }
 
     .bookings-subheader {
         padding: 0;
         margin: 0;
         font-weight: bold;
-
     }
 
     .bookings-form {
         display: flex;
         flex-direction: column;
-        width: 70%;
+        width: 90%;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
+
+        @include for-tablet-landscape-up {
+            width: 70%;
+        }
     }
 
     .radio {
@@ -81,5 +68,4 @@
         margin: 0;
         color: rgb(243, 14, 14);
     }
-
 }
