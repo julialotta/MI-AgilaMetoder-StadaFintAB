@@ -1,14 +1,9 @@
-.mypage-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@use "../mixins";
 
-  .header-div {
-  }
+.mypage-wrapper {
+  @include mixins.flex(column, center, center);
 
   .table-wrapper {
-    display: flex;
     width: 638px;
     .styled-table {
       width: 100%;
