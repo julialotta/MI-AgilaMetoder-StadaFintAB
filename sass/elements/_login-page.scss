@@ -30,7 +30,7 @@
       border-radius: 6px;
       background-color: white;
 
-      @include for-tablet-landscape-up {
+      @include mixins.for-tablet-landscape-up {
         max-width: 450px;
       }
 
