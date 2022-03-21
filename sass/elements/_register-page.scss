@@ -1,4 +1,12 @@
 .registerContainer {
   background-color: $lightgrey;
-  color: red;
+  height: 100vh;
+
+  h4 {
+    font-family: $fat-font;
+  }
+
+  .registerFormContainer {
+    background-color: white;
+  }
 }
