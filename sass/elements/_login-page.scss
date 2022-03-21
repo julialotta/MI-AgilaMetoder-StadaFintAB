@@ -3,8 +3,8 @@
 .login-page {
   @include mixins.flex(column, center, center, 2rem);
 
-  background-color: #f5f4f2;
-  height: 100vh;
+  background-color: $lightgrey;
+  min-height: 100vh;
 
   ///////////////
   // SECTIONS //
@@ -71,6 +71,9 @@
         .register {
           width: 180px;
           text-align: center;
+          font-size: 0.85rem;
+          margin: 20px;
+
           a {
             font-family: $skinny-font;
             color: $grey;
