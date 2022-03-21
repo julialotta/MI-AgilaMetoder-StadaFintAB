@@ -31,9 +31,14 @@
       background-color: white;
 
       .login-form{
-          @include mixins.flex(column, center, flex-start, 1.2rem);
+          @include mixins.flex(column, center, center, 1.2rem);
         .form-input{
             @include mixins.flex(column, center, flex-start, 0.2rem);
+        }
+
+        .form-btn{
+            @include mixins.btn(120px, 12px, 35px);
+            margin-bottom: 20px;
         }
       }
     }
