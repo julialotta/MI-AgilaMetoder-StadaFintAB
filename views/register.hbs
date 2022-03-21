@@ -1,52 +1,72 @@
-<div class="registerContainer">
+<div class="registerPage">
+  <div class="registerPage__section registerPage__section--logo">
+    <span class="clean-logo"></span>
+  </div>
   <img src="/assets/logo.png" alt="" />
-  <h4>Create Account</h4>
-  <p>{{error}}</p>
-  <form action="/register" method="post">
-    <div>
-      <label for="email">E-mail</label>
-      <input
-        type="text"
-        placeholder="E-mail"
-        name="email"
-        id="email"
-        required
-      />
 
-      <label for="password">Password</label>
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        id="password"
-        required
-      />
+  <div class="registerPage__section--form">
+    <h4>Create Account</h4>
+    <p>{{error}}</p>
+    <form action="/register" method="post">
+      <div>
+        <div>
+          <label for="email">E-mail</label>
+          <input
+            type="text"
+            placeholder="E-mail"
+            name="email"
+            id="email"
+            required
+          />
 
-      <label for="confirmPassword">Repeat password</label>
-      <input
-        type="password"
-        placeholder="Repeat password"
-        name="confirmPassword"
-        id="confirmPassword"
-        required
-      />
-    </div>
-    <div>
-      <label for="name">Name</label>
-      <input type="text" placeholder="Name" name="name" id="name" required />
+          <label for="password">Password</label>
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            id="password"
+            required
+          />
 
-      <label for="adress">Adress</label>
-      <input
-        type="text"
-        placeholder="Adress"
-        name="adress"
-        id="adress"
-        required
-      />
+          <label for="confirmPassword">Repeat password</label>
+          <input
+            type="password"
+            placeholder="Repeat password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required
+          />
+        </div>
+        <div>
+          <label for="name">Name</label>
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            id="name"
+            required
+          />
 
-      <label for="phone">Phone</label>
-      <input type="tel" placeholder="Phone" name="phone" id="phone" required />
-    </div>
-    <input type="submit" value="Create" id="submitReg" />
-  </form>
+          <label for="adress">Adress</label>
+          <input
+            type="text"
+            placeholder="Adress"
+            name="adress"
+            id="adress"
+            required
+          />
+
+          <label for="phone">Phone</label>
+          <input
+            type="tel"
+            placeholder="Phone"
+            name="phone"
+            id="phone"
+            required
+          />
+        </div>
+      </div>
+      <input type="submit" value="Create" class="register-btn" />
+    </form>
+  </div>
 </div>
