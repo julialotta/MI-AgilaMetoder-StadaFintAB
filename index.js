@@ -8,6 +8,8 @@ const loginRouter = require("./routes/login-routes");
 const cookieParser = require("cookie-parser");
 const registerroutes = require("./routes/register-routes");
 
+const cleanerRoute = require("./routes/cleaner-route");
+
 const app = express();
 
 app.engine(
@@ -34,6 +36,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/register", registerroutes);
+app.use("/cleaner", cleanerRoute);
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");
