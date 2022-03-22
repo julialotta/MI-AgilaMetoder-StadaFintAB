@@ -3,8 +3,8 @@
 .login-page {
   @include mixins.flex(column, center, center, 2rem);
 
-  background-color: #f5f4f2;
-  height: 100vh;
+  background-color: $lightgrey;
+  min-height: 100vh;
 
   ///////////////
   // SECTIONS //
@@ -30,12 +30,21 @@
       border-radius: 6px;
       background-color: white;
 
-      @include for-tablet-landscape-up {
+      @include mixins.for-tablet-landscape-up {
         max-width: 450px;
       }
 
       h2 {
         font-family: $fat-font;
+      }
+
+      .error{
+        font-family: $skinny-font;
+        font-size: 0.8rem;
+        color: rgb(152, 17, 17);
+        background-color: #f9e4e3;
+        padding: 5px;
+        border-radius: 3px;
       }
 
       .login-form {
@@ -62,6 +71,9 @@
         .register {
           width: 180px;
           text-align: center;
+          font-size: 0.85rem;
+          margin: 20px;
+
           a {
             font-family: $skinny-font;
             color: $grey;
