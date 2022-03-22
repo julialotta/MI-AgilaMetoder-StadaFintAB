@@ -1,0 +1,81 @@
+@use "../mixins";
+
+.bookings-main {
+    background-color: $lightgrey;
+    height: 100vh;
+}
+
+.bookings-container {
+    @include mixins.flex(column, center, center, 0);
+    background-color: #fff;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    width: 90%;
+    padding: 10px;
+    margin: 0 auto;
+
+    @include for-tablet-landscape-up {
+        width: 40%;
+        padding: 20px;
+    }
+
+    .bookings-content {
+        @include mixins.flex(column, center, center, 0);
+        background-color: #fff;
+        width: 100%;
+    }
+
+    .bookings-section {
+        @include mixins.flex(column, center, center, 0);
+        padding: 10px 0px;
+        width: 100%;
+    }
+
+    .bookings-header {
+        font-family: $fat-font;
+    }
+
+    .bookings-subheader {
+        padding: 0;
+        margin: 0;
+        font-family: $fat-font;
+    }
+
+    .bookings-form {
+        @include mixins.flex(column, center, center, 0);
+        width: 90%;
+        margin: 0 auto;
+
+        @include for-tablet-landscape-up {
+            width: 70%;
+        }
+
+        input,
+        label {
+            font-family: $skinny-font;
+        }
+
+        label {
+            font-size: 0.9rem;
+        }
+    }
+
+    .radio {
+        padding: 5px 0px;
+    }
+
+    input[type=submit] {
+        @include mixins.btn(300, 10px, 40);
+    }
+
+    input[type=date] {
+        padding: 5px 0px;
+        margin: 5px 0px;
+    }
+
+    .error-message {
+        padding: 0;
+        margin: 0;
+        color: rgb(243, 14, 14);
+    }
+}
