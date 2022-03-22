@@ -2,8 +2,8 @@ const express = require("express");
 router = express.Router();
 
 //behövs dessa?
-const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
+require("jsonwebtoken");
+require("cookie-parser");
 
 router.get("/mypage", (req, res) => {
   res.render("my-pages-cleaner");
