@@ -29,9 +29,9 @@
       background-color: white;
       border: 1.2px solid $grey;
       border-radius: 6px;
-      width: 60%;
-      @include for-phone-landscape-up {
-        min-width: 600px;
+      width: 85%;
+      @include mixins.for-tablet-landscape-up {
+        max-width: 450px;
       }
 
       form {
@@ -74,6 +74,7 @@
         font-weight: 800;
         font-size: 24px;
       }
+
       .error {
         font-family: $skinny-font;
         font-size: 0.8rem;

@@ -6,7 +6,9 @@
 
   <div class="registerPage__section--form">
     <h4>Create Account</h4>
+    {{#if error}}
     <p class="error">{{error}}</p>
+    {{/if}}
     <form action="/register" method="post">
       <div>
         <div>
