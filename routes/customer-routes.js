@@ -4,6 +4,7 @@ const express = require("express");
 const jsonwebtoken = require("jsonwebtoken");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const { getCleaner } = require("../utils.js");
 
 // GET - SCHEDULED-CLEANINGS FOR CUSTOMER //
 router.get("/mypage", async (req, res) => {
@@ -26,7 +27,6 @@ router.get("/mypage/myaccount", (req, res) => {
 
 // POST - DELETE A BOOKING //
 router.get("/id:/remove", (req, res) => {});
-const { getCleaner } = require("../utils.js");
 
 router.get("/", (req, res) => {
   if (!res.locals.loggedIn) {
@@ -48,6 +48,35 @@ router.get("/book-cleaning", (req, res) => {
 });
 
 // POST – BOOK A CLEANING //
-router.post("/book-cleaning", async (req, res) => {});
+router.post("/book-cleaning", async (req, res) => {
+  const { date, time } = req.body;
+
+  const { token } = req.cookies;
+
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+
+  const userId = tokenData.userId;
+
+  const randomCleaner = await getCleaner();
+
+  if (date && time) {
+    const newBooking = new BookingsModel({
+      date: date,
+      time: time,
+      cleaner: randomCleaner,
+      user: userId,
+    });
+
+    await newBooking.save();
+
+    res.render("customer/book-cleaning");
+  } else {
+    const errorMessage = "Oops! Did you forget to pick a date and time?";
+
+    res.render("customer/book-cleaning", {
+      errorMessage,
+    });
+  }
+});
 
 module.exports = router;
