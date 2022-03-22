@@ -1,1 +1,16 @@
+.login-page {
+  background-color: $lightgrey;
+  min-height: 100vh;
 
+  ///////////////
+  // SECTIONS //
+  /////////////
+  &__section {
+    ///////////////////
+    // LOGO SECTION //
+    /////////////////
+    &--logo {
+      color: black;
+    }
+  }
+}
