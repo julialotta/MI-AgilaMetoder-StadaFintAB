@@ -84,6 +84,19 @@
         font-size: 24px;
       }
 
+      .login-link {
+        width: 180px;
+        text-align: center;
+        font-size: 0.85rem;
+        margin: 20px;
+
+        a {
+          font-family: $skinny-font;
+          color: $grey;
+          text-decoration: none;
+        }
+      }
+
       .register-btn {
         @include mixins.btn(120px, 12px, 35px);
       }
