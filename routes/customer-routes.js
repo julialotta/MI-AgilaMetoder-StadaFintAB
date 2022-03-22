@@ -3,8 +3,7 @@ const BookingsModel = require("../models/BookingsModel.js");
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-
-// GET //
+const { getCleaner } = require("../utils.js")
 
 router.get("/", (req, res) => {
   if (!res.locals.loggedIn) {
@@ -31,17 +30,18 @@ router.post("/book-cleaning", async (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
+  const randomCleaner = await getCleaner()
 
   if(date && time) { 
   const newBooking = new BookingsModel({
     date: date,
     time: time,
+    cleaner: randomCleaner,
     user: userId,
-    // cleaner: getCleaner(),
   });
 
   await newBooking.save();
-  console.log(newBooking)
+
   res.render("customer/book-cleaning");
 } else {
   const errorMessage = "Oops! Did you forget to pick a date and time?"
