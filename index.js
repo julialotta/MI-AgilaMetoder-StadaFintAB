@@ -30,15 +30,28 @@ app.use(express.static("public"));
 /////////////
 // ROUTES //
 ///////////
+
+
 app.use("/login", loginRouter);
-
-app.get("/", async (req, res) => {
-  res.render("home");
-});
-
 app.use("/customer", customersRouter);
 app.use("/register", registerroutes);
 app.use("/cleaner", cleanerRoute);
+
+app.use((req, res, next) => {
+  const { token } = req.cookies;
+  if (token && jwt.verify(token, process.env.JWT_SECRET)) {
+    const tokenData = jwt.decode(token, process.env.JWT_SECRET);
+    res.locals.loggedIn = true;
+    res.locals.id = tokenData.id;
+  } else {
+    res.locals.loggedIn = false;
+  }
+  next();
+});
+
+app.get("/", (req, res) => {
+    res.render("home");
+});
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");

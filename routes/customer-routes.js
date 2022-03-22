@@ -5,6 +5,7 @@ const router = express.Router();
 
 // GET - BOOK A CLEANING //
 router.get("/book-cleaning", (req, res) => {
+  console.log(res.locals.id)
   res.render("customer/book-cleaning");
 });
 
