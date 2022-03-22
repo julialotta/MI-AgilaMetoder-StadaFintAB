@@ -38,7 +38,7 @@
 ///////////
 //BUTTON//
 /////////
-@mixin btn($width, $radius: 20, $height: 35){
+@mixin btn($width, $radius: 20, $height: 35) {
   font-family: $fat-font;
   background-color: $red;
   color: white;
