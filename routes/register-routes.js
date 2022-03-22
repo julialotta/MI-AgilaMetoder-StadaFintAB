@@ -35,8 +35,8 @@ router.post("/", async (req, res) => {
       console.log(newUser);
       if (utils.validateUser(newUser)) {
         await newUser.save();
-        UsersModel.findOne({ name }, (err, user) => {
-          const userData = { userId: user._id, name };
+        UsersModel.findOne({ email }, (err, user) => {
+          const userData = { userId: user._id, email };
           const accessToken = jwt.sign(userData, process.env.JWTSECRET);
           res.cookie("token", accessToken);
           res.redirect("/");
