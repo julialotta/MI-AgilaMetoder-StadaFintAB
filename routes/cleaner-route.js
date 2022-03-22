@@ -6,7 +6,7 @@ require("jsonwebtoken");
 require("cookie-parser");
 
 router.get("/mypage", (req, res) => {
-  res.render("my-pages-cleaner");
+  res.render("cleaner/my-pages-cleaner");
 });
 
 router.post("/log-out", (req, res) => {

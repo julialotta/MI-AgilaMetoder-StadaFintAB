@@ -13,6 +13,10 @@
 @import "./elements/main-page.scss";
 @import "./elements/my-page-cleaner.scss";
 
+//my page for customers, two hbs-files + two scss-files
+@import "./elements/scheduled-cleanings.scss";
+@import "./elements/my-account.scss";
+
 body {
   margin: 0;
   padding: 0;
