@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const UsersModel = require("../models/UsersModel.js");
+//const CleanersModel = require("../models/CleanersModel.js");
 const utils = require("../utils");
 
 router.get("/", async (req, res) => {
@@ -35,8 +36,8 @@ router.post("/", async (req, res) => {
       console.log(newUser);
       if (utils.validateUser(newUser)) {
         await newUser.save();
-        UsersModel.findOne({ name }, (err, user) => {
-          const userData = { userId: user._id, name };
+        UsersModel.findOne({ email }, (err, user) => {
+          const userData = { userId: user._id, email };
           const accessToken = jwt.sign(userData, process.env.JWTSECRET);
           res.cookie("token", accessToken);
           res.redirect("/");
@@ -49,5 +50,22 @@ router.post("/", async (req, res) => {
     }
   });
 });
+
+/////////////////
+//POST CLEANER//
+///////////////
+// router.post("/cleaner", async (req,res) => {
+//   //const { email, name, password } = req.body;
+//   const password = req.body.password;
+
+//   const newCleaner = new CleanersModel({
+//     name: req.body.name,
+//     email: req.body.email,
+//     hashedPassword: utils.hashPassword(password),
+//   });
+  
+//   await newCleaner.save();
+//   res.sendStatus(200);
+// })
 
 module.exports = router;

@@ -26,35 +26,28 @@ router.get("/mypage/myaccount", (req, res) => {
 
 // POST - DELETE A BOOKING //
 router.get("/id:/remove", (req, res) => {});
+const { getCleaner } = require("../utils.js");
+
+router.get("/", (req, res) => {
+  if (!res.locals.loggedIn) {
+    res.redirect("login");
+  }
+});
 
 // GET - BOOK A CLEANING //
 router.get("/book-cleaning", (req, res) => {
-  res.render("customer/book-cleaning");
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+  const userId = tokenData.userId;
+
+  if (!res.locals.loggedIn) {
+    res.redirect("/login");
+  } else {
+    res.render("customer/book-cleaning");
+  }
 });
 
 // POST – BOOK A CLEANING //
-router.post("/book-cleaning", async (req, res) => {
-  const { date, time } = req.body;
-
-  if (date && time) {
-    const newBooking = new BookingsModel({
-      date: date,
-      time: time,
-      // user: {
-      //   _id: user._id,
-      // },
-      // cleaner: getCleaner(),
-    });
-
-    await newBooking.save();
-    console.log(newBooking);
-    res.render("customer/book-cleaning");
-  } else {
-    const errorMessage = "Oops! Did you forget to pick a date and time?";
-    res.render("customer/book-cleaning", {
-      errorMessage,
-    });
-  }
-});
+router.post("/book-cleaning", async (req, res) => {});
 
 module.exports = router;

@@ -12,6 +12,7 @@
     ///////////////////
     // LOGO SECTION //
     /////////////////
+
     &--logo {
       user-select: none;
       width: clamp(130px, 20vw, 180px);
@@ -72,6 +73,14 @@
         font-family: $fat-font;
         font-weight: 800;
         font-size: 24px;
+      }
+      .error {
+        font-family: $skinny-font;
+        font-size: 0.8rem;
+        color: rgb(152, 17, 17);
+        background-color: #f9e4e3;
+        padding: 5px;
+        border-radius: 3px;
       }
 
       .register-btn {

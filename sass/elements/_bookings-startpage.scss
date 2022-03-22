@@ -1,8 +1,14 @@
 @use "../mixins";
 
+.bookings-main {
+    background-color: $lightgrey;
+    height: 100vh;
+}
+
 .bookings-container {
     @include mixins.flex(column, center, center, 0);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #fff;
+    border: 1px solid lightgrey;
     border-radius: 15px;
     width: 90%;
     padding: 10px;
@@ -15,6 +21,7 @@
 
     .bookings-content {
         @include mixins.flex(column, center, center, 0);
+        background-color: #fff;
         width: 100%;
     }
 
