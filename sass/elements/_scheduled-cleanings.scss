@@ -1,17 +1,31 @@
 @use "../mixins";
 
-.cleaner-wrapper {
+.customer-wrapper {
   @include mixins.flex(column, center, center);
-
-  h2 {
-    font-family: $fat-font;
-    font-size: 1.3em;
-    padding-top: 70px;
+  .customer-headlines {
+    display: flex;
+    gap: 70px;
+    padding-bottom: 80px;
+    .scheduledCleanings {
+      font-family: $fat-font;
+      border-bottom: 1.7px solid $red;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+    h2 {
+      font-family: $fat-font;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
   }
 
-  .cleaner-table {
+  .customer-table {
     width: 400px;
-    .cleaner-styled {
+    .customer-styled {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 40px;
@@ -35,21 +49,8 @@
         padding: 15px;
         width: 25%;
       }
-    }
-  }
-  .logout-div {
-    form > input {
-      @include mixins.btn(300, 10px, 50);
-    }
-  }
-}
-
-@include mixins.for-tablet-landscape-up {
-  .cleaner-wrapper {
-    .cleaner-table {
-      width: 638px;
-      .cleaner-styled {
-        font-size: 1.2em;
+      tbody > tr > td > .cancelBtn {
+        @include mixins.btn(90, 6px, 40);
       }
     }
   }

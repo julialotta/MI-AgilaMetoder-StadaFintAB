@@ -1,0 +1,70 @@
+@use "../mixins";
+
+.account-wrapper {
+  @include mixins.flex(column, center, center);
+
+  .account-headlines {
+    padding-bottom: 80px;
+    display: flex;
+    gap: 70px;
+    h2 {
+      font-family: $fat-font;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    .myaccount {
+      font-family: $fat-font;
+      border-bottom: 1.7px solid $red;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+
+  .account-details {
+    width: 500px;
+    display: flex;
+    gap: 40px;
+
+    .mail-name {
+      width: 50%;
+      padding-left: 70px;
+      div > h4 {
+        font-family: $fat-font;
+        margin: 0px;
+        padding-top: 20px;
+      }
+      div > p {
+        font-family: $fat-font;
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+
+    .adress-phone {
+      padding-left: 70px;
+      width: 50%;
+      div > h4 {
+        font-family: $fat-font;
+        margin: 0px;
+        padding-top: 20px;
+      }
+      div > p {
+        font-family: $fat-font;
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+  }
+
+  .logout-div {
+    padding-top: 100px;
+    form > input {
+      @include mixins.btn(300, 10px, 50);
+    }
+  }
+}
