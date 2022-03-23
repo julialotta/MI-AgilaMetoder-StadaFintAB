@@ -16,6 +16,8 @@
     }
     h2 {
       font-family: $fat-font;
+      font-size: 1.3em;
+      padding-top: 70px;
       a {
         text-decoration: none;
         color: black;
@@ -51,6 +53,26 @@
       }
       tbody > tr > td > .cancelBtn {
         @include mixins.btn(90, 6px, 40);
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+    }
+  }
+
+  h2 {
+    font-family: $fat-font;
+    font-size: 1.5em;
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .customer-wrapper {
+    .customer-table {
+      width: 638px;
+      .customer-styled {
+        font-size: 1.2em;
       }
     }
   }
