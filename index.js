@@ -9,27 +9,17 @@ const customersRouter = require("./routes/customer-routes.js");
 const registerroutes = require("./routes/register-routes");
 
 const cleanerRoute = require("./routes/cleaner-route");
-const utils = require("./utils");
+const jwt = require("jsonwebtoken");
+const req = require("express/lib/request");
 
 const app = express();
-
-function findUrl(req, res) {
-  console.log(req.params);
-  req.params;
-}
 
 app.engine(
   "hbs",
   exphbs.engine({
     defaultLayout: "main",
     extname: ".hbs",
-    helpers: {
-      navBar: () => {
-        if (utils.findUrl() == "register") {
-          return bookingUrl;
-        }
-      },
-    },
+    helpers: {},
   })
 );
 
@@ -54,17 +44,15 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.get("/", (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
   if (tokenData) {
     const userId = tokenData.userId;
-    res.render("home",
-    {userId});
+    res.render("home", { userId });
   } else {
-    res.render("login")
+    res.render("login");
   }
 });
 
@@ -72,7 +60,6 @@ app.use("/login", loginRouter);
 app.use("/customer", customersRouter);
 app.use("/register", registerroutes);
 app.use("/cleaner", cleanerRoute);
-
 
 app.listen(8000, () => {
   console.log("http://localhost:8000");

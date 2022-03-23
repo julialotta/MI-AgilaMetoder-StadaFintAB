@@ -3,7 +3,7 @@
 .header {
   @include mixins.flex(row, space-between, center);
   background-color: $lightgrey;
-  height: 70px;
+  height: 100px;
 
   ///////////////
   // SECTIONS //
@@ -17,7 +17,7 @@
       width: clamp(130px, 20vw, 180px);
       .clean-logo {
         content: url("../assets/cleaninc-logo.svg");
-        width: 50%;
+        width: 60%;
         height: fit-content;
         margin-left: 60px;
       }
@@ -26,26 +26,28 @@
       margin-right: 60px;
       @include mixins.flex(row, center, center);
 
-      .profilewhite {
+      .profileUnSelected {
         content: url("../assets/profile-icon-white.svg");
         fill: #25275a !important;
-        width: 30%;
+        width: 65%;
+        margin-right: 15px;
         height: fit-content;
       }
-      .bookingblue {
+      .bookingSelected {
         content: url("../assets/bookings-icon-blue.svg");
-        width: 30%;
+        width: 70%;
         height: fit-content;
       }
-      .profileblue {
+      .profileSelected {
         content: url("../assets/profile-icon-blue.svg");
         fill: #25275a !important;
-        width: 30%;
+        width: 65%;
+        margin-right: 15px;
         height: fit-content;
       }
-      .bookingwhite {
+      .bookingUnselected {
         content: url("../assets/bookings-icon-white.svg");
-        width: 30%;
+        width: 70%;
         height: fit-content;
       }
     }
