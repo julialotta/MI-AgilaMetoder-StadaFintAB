@@ -1,12 +1,23 @@
 const express = require("express");
 router = express.Router();
+const jsonwebtoken = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const BookingsModel = require("../models/BookingsModel.js");
 
 //behövs dessa?
 require("jsonwebtoken");
 require("cookie-parser");
 
-router.get("/mypage", (req, res) => {
-  res.render("my-pages-cleaner");
+router.get("/mypage", async (req, res) => {
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+  const cleanerId = tokenData.cleanerId;
+
+  const cleanings = await BookingsModel.find({ cleaner: cleanerId })
+    .populate("user")
+    .lean();
+
+  res.render("cleaner/my-pages-cleaner", { cleanings });
 });
 
 router.post("/log-out", (req, res) => {

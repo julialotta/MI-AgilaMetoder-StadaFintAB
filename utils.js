@@ -1,4 +1,8 @@
 const bcrypt = require("bcrypt");
+const CleanersModel = require("./models/CleanersModel");
+const BookingsModel = require("./models/BookingsModel")
+const cleanerRoute = require("./routes/cleaner-route");
+const mongoose = require('mongoose');
 
 function validateUser(user) {
   let valid = true;
@@ -24,8 +28,19 @@ const comparePassword = (password, hash) => {
   return correct;
 };
 
+const getCleaner = async () => {
+  const cleaners = await CleanersModel.find().lean();
+
+  // Slumpa fram en städare
+  const randomCleaner = cleaners[Math.floor(Math.random() * cleaners.length)];
+  let cleanerId = randomCleaner._id;
+  console.log(cleanerId)
+  return cleanerId
+}
+
 module.exports = {
   hashPassword,
   validateUser,
   comparePassword,
+  getCleaner
 };
