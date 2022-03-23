@@ -27,7 +27,10 @@
               <td>{{date}}</td>
               <td>{{time}}</td>
               <td>{{cleaner.name}}</td>
-              <td><a href="/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
+              <td><a
+                  href="/customer/{{_id}}/remove"
+                  class="cancelBtn"
+                >Cancel</a></td>
             </tr>
           {{/each}}
 
@@ -36,7 +39,7 @@
     </div>
 
   {{else}}
-    <h5>You don't have any scheduled cleanings</h5>
+    <h2>You don't have any scheduled cleanings</h2>
   {{/if}}
 
 </div>
