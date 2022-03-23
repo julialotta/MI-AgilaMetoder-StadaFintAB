@@ -48,11 +48,13 @@ app.get("/", (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  if (tokenData) {
+  if (tokenData === null) {
+    res.redirect("login")
+  } else if (tokenData.userId) {
     const userId = tokenData.userId;
-    res.render("home", { userId });
+    res.render("customer/scheduled-cleanings", { userId });
   } else {
-    res.render("login");
+    res.redirect("cleaner/mypage");
   }
 });
 
