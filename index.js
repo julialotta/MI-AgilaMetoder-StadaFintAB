@@ -61,6 +61,18 @@ app.use("/customer", customersRouter);
 app.use("/register", registerroutes);
 app.use("/cleaner", cleanerRoute);
 
+/////////////
+//  ERROR //
+///////////
+
+app.use("/unauthorized", (req, res) => {
+  res.status(403).render("errors/unauthorized");
+});
+
+app.use("/", (req, res) => {
+  res.status(404).render("errors/error");
+});
+
 app.listen(8000, () => {
   console.log("http://localhost:8000");
 });
