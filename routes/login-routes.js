@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
         const accessToken = jwt.sign(userData, process.env.JWTSECRET);
 
         res.cookie("token", accessToken);
-        res.redirect("/");
+        res.redirect("/customer/mypage");
       } else if(user && !comparePassword(password, user.hashedPassword)){
           res.render("login", {loginFailed: true})
       }
@@ -27,13 +27,12 @@ router.post("/", async (req, res) => {
 
   //Söker bland städare
   CleanersModel.findOne({email}, (err, cleaner) => {
-    //OBS! Hur får vi hashed password till städare?
     if (cleaner && comparePassword(password, cleaner.hashedPassword)){
       const cleanerData = { cleanerId: cleaner._id, email };
       const accessToken = jwt.sign(cleanerData, process.env.JWTSECRET);
 
       res.cookie("token", accessToken);
-      res.redirect("/");
+      res.redirect("/cleaner/mypage");
     } else if(cleaner && !comparePassword(password, cleaner.hashedPassword)){
         res.render("login", {loginFailed: true})
     } else{
