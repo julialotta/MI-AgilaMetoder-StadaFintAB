@@ -28,7 +28,6 @@ router.get("/mypage/myaccount", async (req, res) => {
   const userId = tokenData.userId;
 
   const user = await UsersModel.find({ _id: userId }).lean();
-  console.log(user);
 
   res.render("customer/my-account", { user });
 });
