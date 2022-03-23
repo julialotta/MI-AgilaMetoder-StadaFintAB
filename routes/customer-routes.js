@@ -3,7 +3,6 @@ const BookingsModel = require("../models/BookingsModel.js");
 const UsersModel = require("../models/UsersModel.js");
 
 const express = require("express");
-const jsonwebtoken = require("jsonwebtoken");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { getCleaner } = require("../utils.js");
@@ -21,6 +20,12 @@ router.get("/mypage", async (req, res) => {
   res.render("customer/scheduled-cleanings", { bookings });
 });
 
+// DELETE A BOOKING FROM SCHEDULED-CLEANINGS //
+router.get("/:id/remove", async (req, res) => {
+  await BookingsModel.findById(req.params.id).deleteOne();
+  res.redirect("/customer/mypage");
+});
+
 // GET - MY-ACCOUNT FOR CUSTOMER //
 router.get("/mypage/myaccount", async (req, res) => {
   const { token } = req.cookies;
@@ -31,9 +36,6 @@ router.get("/mypage/myaccount", async (req, res) => {
 
   res.render("customer/my-account", { user });
 });
-
-// POST - DELETE A BOOKING //
-router.get("/id:/remove", (req, res) => {});
 
 router.get("/", (req, res) => {
   if (!res.locals.loggedIn) {
