@@ -1,6 +1,9 @@
-.login-page {
+@use "../mixins";
+
+.header {
+  @include mixins.flex(row, space-between, center);
   background-color: $lightgrey;
-  min-height: 100vh;
+  height: 100px;
 
   ///////////////
   // SECTIONS //
@@ -10,7 +13,43 @@
     // LOGO SECTION //
     /////////////////
     &--logo {
-      color: black;
+      user-select: none;
+      width: clamp(130px, 20vw, 180px);
+      .clean-logo {
+        content: url("../assets/cleaninc-logo.svg");
+        width: 60%;
+        height: fit-content;
+        margin-left: 60px;
+      }
+    }
+    &--iconContainer {
+      margin-right: 60px;
+      @include mixins.flex(row, center, center);
+
+      .profileUnSelected {
+        content: url("../assets/profile-icon-white.svg");
+        fill: #25275a !important;
+        width: 65%;
+        margin-right: 15px;
+        height: fit-content;
+      }
+      .bookingSelected {
+        content: url("../assets/bookings-icon-blue.svg");
+        width: 70%;
+        height: fit-content;
+      }
+      .profileSelected {
+        content: url("../assets/profile-icon-blue.svg");
+        fill: #25275a !important;
+        width: 65%;
+        margin-right: 15px;
+        height: fit-content;
+      }
+      .bookingUnselected {
+        content: url("../assets/bookings-icon-white.svg");
+        width: 70%;
+        height: fit-content;
+      }
     }
   }
 }
