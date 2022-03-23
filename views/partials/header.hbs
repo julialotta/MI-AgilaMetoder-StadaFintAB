@@ -1,8 +1,30 @@
-<header class="header__section">
-  <div class="header__section--logo"></div>
+{{#if bookingUrl}}
 
-  <div class="header__section--iconContainer iconContainer__section">
-    <div class="iconContainer__section--profile">profile</div>
-    <div class="iconContainer__section--bookings">booking</div>
-  </div>
-</header>
+  <header class="header header__section">
+    <div class="header__section--logo">
+      <span class="clean-logo"></span>
+    </div>
+    <div data-href="/login" class="header__section--iconContainer">
+      <div class="profilewhite"></div>
+      <a href="/register">
+        <div class="bookingblue"></div>
+      </a>
+    </div>
+  </header>
+  {{if profileUrl}}
+
+  <header class="header header__section">
+    <div class="header__section--logo">
+      <span class="clean-logo"></span>
+    </div>
+    <div class="header__section--iconContainer">
+      <a href="/login">
+        <div href="/login" class="profileblue">
+        </div>
+      </a>
+      <a href="/register">
+        <div class="bookingwhite"></div>
+      </a>
+    </div>
+  </header>
+{{/if}}

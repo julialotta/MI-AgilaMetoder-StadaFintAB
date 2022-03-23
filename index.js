@@ -3,21 +3,32 @@ require("./mongoose");
 
 const express = require("express");
 const exphbs = require("express-handlebars");
-const jwt = require("jsonwebtoken");
 const loginRouter = require("./routes/login-routes");
 const cookieParser = require("cookie-parser");
 const registerroutes = require("./routes/register-routes");
 
 const cleanerRoute = require("./routes/cleaner-route");
+const utils = require("./utils");
 
 const app = express();
+
+function findUrl(req, res) {
+  console.log(req.params);
+  req.params;
+}
 
 app.engine(
   "hbs",
   exphbs.engine({
     defaultLayout: "main",
     extname: ".hbs",
-    helpers: {},
+    helpers: {
+      navBar: () => {
+        if (utils.findUrl() == "register") {
+          return bookingUrl;
+        }
+      },
+    },
   })
 );
 
