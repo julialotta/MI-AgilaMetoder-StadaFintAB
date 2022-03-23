@@ -1,5 +1,7 @@
 require("dotenv").config();
 const BookingsModel = require("../models/BookingsModel.js");
+const UsersModel = require("../models/UsersModel.js");
+
 const express = require("express");
 const jsonwebtoken = require("jsonwebtoken");
 const router = express.Router();
@@ -8,21 +10,27 @@ const { getCleaner } = require("../utils.js");
 
 // GET - SCHEDULED-CLEANINGS FOR CUSTOMER //
 router.get("/mypage", async (req, res) => {
-  // hämta ID på den som är inloggad
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
 
-  //hämta bookning av inloggad user
-  const booking = await BookingsModel.find({ user: userId }).lean();
-  console.log(booking);
+  const bookings = await BookingsModel.find({ user: userId })
+    .populate("cleaner")
+    .lean();
 
-  res.render("customer/scheduled-cleanings");
+  res.render("customer/scheduled-cleanings", { bookings });
 });
 
 // GET - MY-ACCOUNT FOR CUSTOMER //
-router.get("/mypage/myaccount", (req, res) => {
-  res.render("customer/my-account");
+router.get("/mypage/myaccount", async (req, res) => {
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+  const userId = tokenData.userId;
+
+  const user = await UsersModel.find({ _id: userId }).lean();
+  console.log(user);
+
+  res.render("customer/my-account", { user });
 });
 
 // POST - DELETE A BOOKING //

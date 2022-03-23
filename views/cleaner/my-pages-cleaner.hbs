@@ -5,6 +5,7 @@
   <div class="cleaner-table">
     <table class="cleaner-styled">
       <thead>
+
         <tr>
           <th>Date</th>
           <th>Time</th>
@@ -13,14 +14,14 @@
         </tr>
       </thead>
       <tbody>
-        {{! om bokninf finns, insert i td inuti tr }}
-        <tr>
-          <td>2021-02-02</td>
-          <td>kl 9</td>
-          <td>agda</td>
-          <td>stockholm</td>
-        </tr>
-
+        {{#each cleanings}}
+          <tr>
+            <td>{{date}}</td>
+            <td>{{time}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.adress}}</td>
+          </tr>
+        {{/each}}
       </tbody>
     </table>
   </div>

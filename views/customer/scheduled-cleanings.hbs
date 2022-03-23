@@ -7,27 +7,34 @@
     <h2><a href="/customer/mypage/myaccount">My account</a></h2>
   </div>
 
-  <div class="customer-table">
-    <table class="customer-styled">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Customer</th>
-          <th> </th>
-        </tr>
-      </thead>
-      <tbody>
+  {{#if bookings}}
 
-        <tr>
-          <td>lägg in från js</td>
-          <td>lägg in från js</td>
-          <td>lägg in från js</td>
-          <td><a href="/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
-        </tr>
+    <div class="customer-table">
+      <table class="customer-styled">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Cleaner</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each bookings}}
+            <tr>
+              <td>{{date}}</td>
+              <td>{{time}}</td>
+              <td>{{cleaner.name}}</td>
+              <td><a href="/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
+            </tr>
+          {{/each}}
 
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+
+  {{else}}
+    <h5>You don't have any scheduled cleanings</h5>
+  {{/if}}
 
 </div>

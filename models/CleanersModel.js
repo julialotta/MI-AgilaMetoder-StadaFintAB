@@ -6,6 +6,6 @@ const cleanerSchema = new mongoose.Schema({
   hashedPassword: { type: String, required: true },
 });
 
-const CleanersModel = mongoose.model("cleaners", cleanerSchema);
+const CleanersModel = mongoose.model("Cleaners", cleanerSchema);
 
 module.exports = CleanersModel;

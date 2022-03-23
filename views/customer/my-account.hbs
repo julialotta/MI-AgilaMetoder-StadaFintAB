@@ -8,27 +8,30 @@
 
   <div class="account-details">
 
-    <div class="mail-name">
-      <div>
-        <h4>Email</h4>
-        <p>lägg in från js</p>
+    {{#each user}}
+      <div class="mail-name">
+        <div>
+          <h4>Email</h4>
+          <p>{{email}}</p>
+        </div>
+        <div>
+          <h4>Adress</h4>
+          <p>{{adress}}</p>
+        </div>
       </div>
-      <div>
-        <h4>Adress</h4>
-        <p>lägg in från js</p>
-      </div>
-    </div>
 
-    <div class="adress-phone">
-      <div>
-        <h4>Name</h4>
-        <p>lägg in från js</p>
+      <div class="adress-phone">
+        <div>
+          <h4>Name</h4>
+          <p>{{name}}</p>
+        </div>
+        <div>
+          <h4>Phone</h4>
+          <p>{{phone}}</p>
+        </div>
       </div>
-      <div>
-        <h4>Phone</h4>
-        <p>lägg in från js</p>
-      </div>
-    </div>
+
+    {{/each}}
   </div>
 
   <div class="logout-div">

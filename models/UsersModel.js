@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema({
   hashedPassword: { type: String, required: true },
 });
 
-const UsersModel = mongoose.model("users", userSchema);
+const UsersModel = mongoose.model("Users", userSchema);
 
 module.exports = UsersModel;
