@@ -6,9 +6,9 @@ const exphbs = require("express-handlebars");
 const loginRouter = require("./routes/login-routes");
 const cookieParser = require("cookie-parser");
 const customersRouter = require("./routes/customer-routes.js");
-const registerroutes = require("./routes/register-routes");
-
-const cleanerRoute = require("./routes/cleaner-route");
+const registerroutes = require("./routes/register-routes.js");
+const adminRoute = require("./routes/admin-routes.js")
+const cleanerRoute = require("./routes/cleaner-route.js");
 const jwt = require("jsonwebtoken");
 const req = require("express/lib/request");
 
@@ -62,6 +62,7 @@ app.use("/login", loginRouter);
 app.use("/customer", customersRouter);
 app.use("/register", registerroutes);
 app.use("/cleaner", cleanerRoute);
+app.use("/admin", adminRoute);
 
 /////////////
 //  ERROR //
