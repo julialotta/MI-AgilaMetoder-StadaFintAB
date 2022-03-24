@@ -1,0 +1,17 @@
+@use "../mixins";
+
+.errorPage {
+    @include mixins.flex(column, center, center);
+    padding: 100px 0px;
+    font-family: $fat-font;
+
+    p {
+        font-size: 1.1rem;
+    }
+}
+
+.go-back-btn {
+    @include mixins.flex(column, center, center);
+    @include mixins.btn(120, 10px, 50);
+    margin: 10px 0px;
+}

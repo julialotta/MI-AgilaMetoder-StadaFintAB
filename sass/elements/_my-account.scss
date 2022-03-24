@@ -4,11 +4,13 @@
   @include mixins.flex(column, center, center);
 
   .account-headlines {
-    padding-bottom: 80px;
     display: flex;
     gap: 70px;
+    padding-bottom: 80px;
     h2 {
       font-family: $fat-font;
+      font-size: 1.3em;
+      padding-top: 40px;
       a {
         text-decoration: none;
         color: black;
@@ -28,18 +30,19 @@
   .account-details {
     width: 500px;
     display: flex;
-    gap: 40px;
 
     .mail-name {
       width: 50%;
       padding-left: 70px;
       div > h4 {
         font-family: $fat-font;
+        font-size: 1.2em;
         margin: 0px;
         padding-top: 20px;
       }
       div > p {
         font-family: $fat-font;
+        font-size: 1.2em;
         margin: 0px;
         padding: 0px;
       }
@@ -50,11 +53,13 @@
       width: 50%;
       div > h4 {
         font-family: $fat-font;
+        font-size: 1.2em;
         margin: 0px;
         padding-top: 20px;
       }
       div > p {
         font-family: $fat-font;
+        font-size: 1.2em;
         margin: 0px;
         padding: 0px;
       }
@@ -66,5 +71,11 @@
     form > input {
       @include mixins.btn(300, 10px, 50);
     }
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .account-details {
+    gap: 70px;
   }
 }
