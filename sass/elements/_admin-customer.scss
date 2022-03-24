@@ -20,6 +20,53 @@
     text-align: center;
   }
 
+  .admin-headlines {
+    display: flex;
+    gap: 70px;
+    padding-bottom: 10px;
+
+    h2 {
+      font-family: $fat-font;
+      font-size: 1.3em;
+      padding-top: 40px;
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    .employees {
+      font-family: $fat-font;
+      border-bottom: 1.7px solid $red;
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+
+  .employee-header {
+    @include mixins.flex(row, center, center);
+    gap: 20px;
+  }
+
+  .create-account {
+    padding: 0px 0px 15px;
+    font-family: $skinny-font;
+
+    a {
+      color: rgb(85, 85, 85);
+      text-transform: lowercase;
+      text-decoration: none;
+
+      &:hover {
+        border-bottom: 1px solid rgb(85, 85, 85);
+      }
+    }
+  }
+
   .customer-admin-table {
     width: 400px;
 

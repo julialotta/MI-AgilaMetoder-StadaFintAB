@@ -1,41 +1,48 @@
 <div class="customer-admin-wrapper">
+    <div class="account-wrapper">
 
-    <h3>Employee</h3>
+        <div class="admin-headlines">
+            <h2><a href="/customer/mypage">Customers</a> </h2>
+            <h2 class="employees"><a href="/customer/mypage/myaccount">
+                    Employees</a></h2>
+        </div>
 
-    <select name="employees">
-        <option value="" disabled selected> Select employee</option>
-        {{#each employees}}
-        <option value="{{name}}">{{name}}</option>
-        {{/each}}
-    </select>
+        <h3>Employee</h3>
 
-    <h3>Schedule</h3>
-    <div class="customer-admin-table">
-        <table class="customer-admin-styled">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Customer</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {{!-- {{#each employees}} --}}
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td><a href="/cleaner/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
-                    {{!-- {{/each}} --}}
-                </tr>
+        <div class="employee-header">
+            {{> adminSelect}}
+            <span class="create-account"><a href="/admin/employee/create">Create new account +</a></span>
+        </div>
+        <h3>Schedule</h3>
+        <div class="customer-admin-table">
+            <table class="customer-admin-styled">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Customer</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each bookings}}
+                    <tr>
 
-            </tbody>
-        </table>
+                        <td>{{date}}</td>
+                        <td>{{time}}</td>
+                        <td>{{user}}</td>
+                        <td>Location</td>
+                        <td><a href="/admin/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
+
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+
+        <form action="/admin/employee/delete" method="post">
+            <input type="submit" value="Delete account" class="deleteBtn" />
+        </form>
+
     </div>
-
-    <form action="/admin/customer" method="post">
-        <input type="submit" value="Delete account" class="deleteBtn" />
-    </form>
-
-</div>

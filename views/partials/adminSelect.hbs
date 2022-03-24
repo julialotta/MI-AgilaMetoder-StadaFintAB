@@ -1,0 +1,8 @@
+<form action="/admin/employees" method="post">
+    <select name="employee" id="employee" onchange="this.form.submit()">
+        <option value="" disabled selected>Select employee</option>
+        {{#each employees}}
+        <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+</form>
