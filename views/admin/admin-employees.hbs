@@ -2,8 +2,11 @@
 
     <h3>Employee</h3>
 
-    <select name="xxx" id="xxx">
-        <option value="xxx">xxx</option>
+    <select name="employees">
+        <option value="" disabled selected> Select employee</option>
+        {{#each employees}}
+        <option value="{{name}}">{{name}}</option>
+        {{/each}}
     </select>
 
     <h3>Schedule</h3>
