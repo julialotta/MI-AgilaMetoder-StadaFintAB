@@ -1,0 +1,116 @@
+@use "../mixins";
+
+.customer-admin-wrapper {
+  @include mixins.flex(column, center, center);
+
+  h3 {
+    font-family: $fat-font;
+    font-size: 1.3em;
+    padding-top: 30px;
+  }
+
+  select {
+    width: 190px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: $lightgrey;
+    border-color: $grey;
+    padding-left: 78px;
+    font-family: $skinny-font;
+  }
+
+  .customer-admin-table {
+    width: 400px;
+    .customer-admin-styled {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      margin-top: 21px;
+      font-size: 1em;
+      thead > tr {
+        text-align: left;
+      }
+      thead > tr > th {
+        font-family: $fat-font;
+        padding-left: 15px;
+        padding-bottom: 15px;
+        width: 25%;
+      }
+      tbody > tr {
+        border-bottom: 1px solid $grey;
+      }
+      tbody > tr > td {
+        font-family: $skinny-font;
+        font-size: 0.9em;
+        padding: 15px;
+        width: 25%;
+      }
+      tbody > tr > td > .cancelBtn {
+        @include mixins.btn(90, 6px, 40);
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+    }
+  }
+
+  .customer-admin-details {
+    width: 500px;
+    display: flex;
+    gap: 40px;
+    padding-bottom: 50px;
+
+    .mail-name {
+      width: 50%;
+      padding-left: 120px;
+      div > h4 {
+        font-family: $fat-font;
+        margin: 0px;
+        padding-top: 20px;
+      }
+      div > p {
+        font-family: $fat-font;
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+
+    .adress-phone {
+      padding-left: 45px;
+      width: 50%;
+      div > h4 {
+        font-family: $fat-font;
+        margin: 0px;
+        padding-top: 20px;
+      }
+      div > p {
+        font-family: $fat-font;
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+  }
+
+  .editBtn {
+    @include mixins.btn(300, 10px, 40);
+    background-color: $grey;
+  }
+
+  .deletebtn {
+    @include mixins.btn(300, 10px, 40);
+
+    margin-bottom: 50px;
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .customer-admin-wrapper {
+    .customer-admin-table {
+      width: 638px;
+      .customer-admin-styled {
+        font-size: 1.2em;
+      }
+    }
+  }
+}

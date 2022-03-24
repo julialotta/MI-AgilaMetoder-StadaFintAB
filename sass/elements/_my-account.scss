@@ -30,7 +30,6 @@
   .account-details {
     width: 500px;
     display: flex;
-    gap: 40px;
 
     .mail-name {
       width: 50%;
@@ -72,5 +71,11 @@
     form > input {
       @include mixins.btn(300, 10px, 50);
     }
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .account-details {
+    gap: 70px;
   }
 }

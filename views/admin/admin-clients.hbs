@@ -1,23 +1,73 @@
-<table class="clients-styled">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Cleaner</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-              <td>xxxx</td>
-              <td>xxxx</td>
-              <td>xxxx</td>
-              <td><a
-                  href="/customer/{{_id}}/remove"
-                  class="cancelBtn"
-                >Cancel</a></td>
-            </tr>
-          {{/each}}
+<div class="customer-admin-wrapper">
 
-        </tbody>
-      </table>
+  <h3>Customer</h3>
+
+  <select name="xxx" id="xxx">
+    <option value="xxx">xxx</option>
+  </select>
+
+  <h3>Schedule</h3>
+  <div class="customer-admin-table">
+    <table class="customer-admin-styled">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Cleaner</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>xxxx</td>
+          <td>xxxx</td>
+          <td>xxxx</td>
+          <td><a
+              href="/customer/{{_id}}/remove"
+              class="cancelBtn"
+            >Cancel</a></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Information</h3>
+
+  <div class="customer-admin-details">
+
+    {{!-- {{#each user}} --}}
+    <div class="mail-name">
+      <div>
+        <h4>Email</h4>
+        <p>xxx</p>
+      </div>
+      <div>
+        <h4>Adress</h4>
+        <p>xxx</p>
+      </div>
+    </div>
+
+    <div class="adress-phone">
+      <div>
+        <h4>Name</h4>
+        <p>xxx</p>
+      </div>
+      <div>
+        <h4>Phone</h4>
+        <p>xxx</p>
+      </div>
+    </div>
+
+    {{!-- {{/each}} --}}
+  </div>
+
+  <form action="/admin/customer" method="post">
+    <input type="submit" value="Edit account" class="editBtn" />
+  </form>
+
+  <form action="/admin/customer" method="post">
+    <input type="submit" value="Delete account" class="deleteBtn" />
+  </form>
+
+</div>
