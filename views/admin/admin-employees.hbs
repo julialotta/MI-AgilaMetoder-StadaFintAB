@@ -1,0 +1,37 @@
+<div class="customer-admin-wrapper">
+
+    <h3>Employee</h3>
+
+    <select name="xxx" id="xxx">
+        <option value="xxx">xxx</option>
+    </select>
+
+    <h3>Schedule</h3>
+    <div class="customer-admin-table">
+        <table class="customer-admin-styled">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Customer</th>
+                    <th>Location</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>xxxx</td>
+                    <td>xxxx</td>
+                    <td>xxxx</td>
+                    <td><a href="/customer/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <form action="/admin/customer" method="post">
+        <input type="submit" value="Delete account" class="deleteBtn" />
+    </form>
+
+</div>
