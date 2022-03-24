@@ -11,7 +11,7 @@ router.get("/customers", (req, res) => {
 
 router.get("/employees", async (req, res) => {
   const employees = await CleanersModel.find().lean()
-  console.log(employees)
+
   res.render("admin/admin-employees", {
     employees
   });
