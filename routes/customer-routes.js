@@ -3,7 +3,6 @@ const BookingsModel = require("../models/BookingsModel.js");
 const UsersModel = require("../models/UsersModel.js");
 
 const express = require("express");
-const jsonwebtoken = require("jsonwebtoken");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { getCleaner } = require("../utils.js");
@@ -17,7 +16,6 @@ router.get("/mypage", async (req, res) => {
   const bookings = await BookingsModel.find({ user: userId })
     .populate("cleaner")
     .lean();
-
   res.render("customer/scheduled-cleanings", { bookings });
 });
 
@@ -26,7 +24,6 @@ router.get("/mypage/myaccount", async (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
-
   const user = await UsersModel.find({ _id: userId }).lean();
 
   res.render("customer/my-account", { user });
@@ -57,15 +54,13 @@ router.get("/book-cleaning", (req, res) => {
 // POST – BOOK A CLEANING //
 router.post("/book-cleaning", async (req, res) => {
   const { date, time } = req.body;
-
   const { token } = req.cookies;
-
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
   const userId = tokenData.userId;
   const randomCleaner = await getCleaner(date, time);
 
-  if (date && time) {
+  if (date && time && randomCleaner) {
     const newBooking = new BookingsModel({
       date: date,
       time: time,
@@ -75,9 +70,19 @@ router.post("/book-cleaning", async (req, res) => {
 
     await newBooking.save();
 
-    res.render("customer/book-cleaning");
-  } else {
+    const bookings = await BookingsModel.find({ user: userId })
+      .populate("cleaner")
+      .lean();
+
+    res.render("customer/scheduled-cleanings", { bookings });
+  } else if (!date && !time) {
     const errorMessage = "Oops! Did you forget to pick a date and time?";
+    res.render("customer/book-cleaning", {
+      errorMessage,
+    });
+  } else if (!randomCleaner) {
+    const errorMessage =
+      "The time and date you've chosen is unfortunately fully booked. Please pick another time.";
     res.render("customer/book-cleaning", {
       errorMessage,
     });

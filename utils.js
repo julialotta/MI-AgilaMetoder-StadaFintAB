@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt");
 const CleanersModel = require("./models/CleanersModel");
-const BookingsModel = require("./models/BookingsModel")
+const BookingsModel = require("./models/BookingsModel");
 const cleanerRoute = require("./routes/cleaner-route");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 
 function validateUser(user) {
   let valid = true;
@@ -34,44 +35,72 @@ const getCleaner = async (date, time) => {
   // Hämta alla bokningar från BookingsModel
   let bookings = await BookingsModel.find().lean();
 
-  // Slumpa fram en städare från CleanersModel
-  const randomCleaner = cleaners[Math.floor(Math.random() * cleaners.length)];
-  
-  // Lägg städarens id i en ny variabel
-  let cleanerId = randomCleaner._id;
-  
-  // Testkod för att kolla tillgänglighet - fungerar ej just nu :( 
+  // Skapa ny array i shufflad ordning
+  let array = [];
+  for (let i = 0; i < cleaners.length; i++) {
+    array.push(cleaners[i]);
+  }
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  };
+  shuffleArray(array);
+  //Kolla tillgänglihet
+  let matchingIdArray = [];
+  let matchingIdDateArray = [];
+  let matchingIdDateTimeArray = [];
 
-  // Skapa ny lista för städare
-  // let newCleanerslist = []
+  for (let i = 0; i < array.length; i++) {
+    if (bookings.length > 0) {
+      //kollar om id matchar
+      for (let j = 0; j < bookings.length; j++) {
+        if (bookings[j].cleaner.toString() === array[i]._id.toString()) {
+          matchingIdArray.push(bookings[j]);
+          //kollar om date matchar på alla bokningar som har id som matchar
+          for (let k = 0; k < matchingIdArray.length; k++) {
+            if (matchingIdArray[k].date.toString() === date.toString()) {
+              matchingIdDateArray.push(matchingIdArray[k]);
 
-  // Hämta id från alla städare
-  // cleaners.forEach(cleaner => {
-  //   let id = cleaner._id;
-  //   // Pusha dem till nya listan
-  //   newCleanerslist.push(id)
-  // });
-
-  // Shuffla listan med städare
-  // newCleanerslist = newCleanerslist.sort(() => Math.random() - 0.5)
-
-  // Kolla om städaren i bokningen är uppbokad på samma datum & tid
-  // Just nu kollar den cleanerId från rad 41, inte id:et från shufflade listan
-
-  // bookings.forEach(booking => {
-  //   if (booking.cleaner === cleanerId && booking.date === date && booking.time === time) {
-  //     console.log("Cleaner is busy")
-  //   } else {
-  //     return cleanerId
-  //   }
-  // });
-
-  return cleanerId
-}
+              //kollar om time matchar på alla bokningar som har id som matchar
+              for (let l = 0; l < matchingIdDateArray.length; l++) {
+                if (
+                  matchingIdDateArray[l].time.toString() === time.toString()
+                ) {
+                  matchingIdDateTimeArray.push(matchingIdDateArray[l]);
+                }
+                // retur om inte time matchar
+                else {
+                  return matchingIdDateArray[l]._id;
+                }
+              }
+            }
+            // retur om inte date matchar
+            else {
+              return matchingIdArray[k]._id;
+            }
+          }
+        }
+        // retur om inte Id matchar
+        else {
+          return array[i].Id;
+        }
+      }
+    } else {
+      console.log("====================================");
+      console.log("first booking");
+      console.log("====================================");
+      return array[i]._id;
+    }
+  }
+};
 
 module.exports = {
   hashPassword,
   validateUser,
   comparePassword,
-  getCleaner
+  getCleaner,
 };
