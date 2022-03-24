@@ -52,25 +52,40 @@ const getCleaner = async (date, time) => {
   //Kolla tillgänglihet
 
   if (bookings.length > 0) {
+    // om det finns bokningar:
+
+    //alla städare i listan kollas
     for (let i = 0; i < array.length; i++) {
       let matchingIdArray = [];
       let matchingIdDateArray = [];
       let matchingIdDateTimeArray = [];
+
+      //för varje städare kollar vi om idt matchar någon bokning. om inte kan vi boka den
+
       for (let j = 0; j < bookings.length; j++) {
         if (bookings[j].cleaner.toString() === array[i]._id.toString()) {
-          matchingIdArray.push(array[i]);
+          matchingIdArray.push(bookings[j]);
         }
       }
-
       if (matchingIdArray.length === 0) {
+        console.log("====================================");
+        console.log("id not same");
+        console.log("====================================");
         return array[i]._id;
-      } else {
+      }
+      // annars om det finns matchande id, kollar vi datumen
+      else {
         for (let k = 0; k < matchingIdArray.length; k++) {
-          if (matchingIdArray[k].date === date) {
+          if (matchingIdArray[k].date == date) {
             matchingIdDateArray.push(matchingIdArray[k]);
           }
         }
+
+        // om inget datum matchar där kan vi boka
         if (matchingIdDateArray.length === 0) {
+          console.log("====================================");
+          console.log("date not same");
+          console.log("====================================");
           return array[i]._id;
         } else {
           for (let l = 0; l < matchingIdDateArray.length; l++) {
@@ -79,6 +94,9 @@ const getCleaner = async (date, time) => {
             }
           }
           if (matchingIdDateTimeArray.length === 0) {
+            console.log("====================================");
+            console.log("time not same");
+            console.log("====================================");
             return array[i]._id;
           } else {
             console.log("Inga tillgängliga av våra 19 städare");
