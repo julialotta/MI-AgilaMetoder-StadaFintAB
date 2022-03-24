@@ -90,7 +90,7 @@ router.post("/book-cleaning", async (req, res) => {
   const userId = tokenData.userId;
   const randomCleaner = await getCleaner();
 
-  if (date && time) {
+  if (date && time && randomCleaner) {
     const newBooking = new BookingsModel({
       date: date,
       time: time,

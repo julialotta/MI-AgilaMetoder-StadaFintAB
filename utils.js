@@ -50,54 +50,49 @@ const getCleaner = async (date, time) => {
   };
   shuffleArray(array);
   //Kolla tillgänglihet
-  let matchingIdArray = [];
-  let matchingIdDateArray = [];
-  let matchingIdDateTimeArray = [];
 
-  for (let i = 0; i < array.length; i++) {
-    if (bookings.length > 0) {
-      //kollar om id matchar
+  if (bookings.length > 0) {
+    for (let i = 0; i < array.length; i++) {
+      let matchingIdArray = [];
+      let matchingIdDateArray = [];
+      let matchingIdDateTimeArray = [];
       for (let j = 0; j < bookings.length; j++) {
         if (bookings[j].cleaner.toString() === array[i]._id.toString()) {
-          matchingIdArray.push(bookings[j]);
-          //kollar om date matchar på alla bokningar som har id som matchar
-          for (let k = 0; k < matchingIdArray.length; k++) {
-            if (matchingIdArray[k].date.toString() === date.toString()) {
-              matchingIdDateArray.push(matchingIdArray[k]);
-
-              //kollar om time matchar på alla bokningar som har id som matchar
-              for (let l = 0; l < matchingIdDateArray.length; l++) {
-                if (
-                  matchingIdDateArray[l].time.toString() === time.toString()
-                ) {
-                  matchingIdDateTimeArray.push(matchingIdDateArray[l]);
-                }
-                // retur om inte time matchar
-                else {
-                  return matchingIdDateArray[l]._id;
-                }
-              }
-            }
-            // retur om inte date matchar
-            else {
-              return matchingIdArray[k]._id;
-            }
-          }
-        }
-        // retur om inte Id matchar
-        else {
-          return array[i].Id;
+          matchingIdArray.push(array[i]);
         }
       }
-    } else {
-      console.log("====================================");
-      console.log("first booking");
-      console.log("====================================");
-      return array[i]._id;
+
+      if (matchingIdArray.length === 0) {
+        return array[i]._id;
+      } else {
+        for (let k = 0; k < matchingIdArray.length; k++) {
+          if (matchingIdArray[k].date === date) {
+            matchingIdDateArray.push(matchingIdArray[k]);
+          }
+        }
+        if (matchingIdDateArray.length === 0) {
+          return array[i]._id;
+        } else {
+          for (let l = 0; l < matchingIdDateArray.length; l++) {
+            if (matchingIdDateArray[l].time === time) {
+              matchingIdDateTimeArray.push(matchingIdDateArray[l]);
+            }
+          }
+          if (matchingIdDateTimeArray.length === 0) {
+            return array[i]._id;
+          } else {
+            console.log("Inga tillgängliga av våra 19 städare");
+          }
+        }
+      }
     }
+  } else {
+    console.log("====================================");
+    console.log("first booking");
+    console.log("====================================");
+    return array[0]._id;
   }
 };
-
 module.exports = {
   hashPassword,
   validateUser,
