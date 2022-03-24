@@ -88,7 +88,7 @@ router.post("/book-cleaning", async (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
-  const randomCleaner = await getCleaner();
+  const randomCleaner = await getCleaner(date, time);
 
   if (date && time && randomCleaner) {
     const newBooking = new BookingsModel({
