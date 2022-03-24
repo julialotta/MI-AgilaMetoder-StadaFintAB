@@ -7,7 +7,7 @@ const loginRouter = require("./routes/login-routes");
 const cookieParser = require("cookie-parser");
 const customersRouter = require("./routes/customer-routes.js");
 const registerroutes = require("./routes/register-routes.js");
-const adminRoute = require("./routes/admin-routes.js")
+const adminRoute = require("./routes/admin-routes.js");
 const cleanerRoute = require("./routes/cleaner-route.js");
 const jwt = require("jsonwebtoken");
 const req = require("express/lib/request");
@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
   if (tokenData === null) {
-    res.redirect("login")
+    res.redirect("login");
   } else if (tokenData.userId) {
     const userId = tokenData.userId;
     res.render("customer/scheduled-cleanings", { userId });
