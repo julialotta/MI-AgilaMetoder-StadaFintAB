@@ -19,8 +19,6 @@ router.post("/", async (req, res) => {
         const accessToken = jwt.sign(userData, process.env.JWTSECRET);
         res.cookie("token", accessToken);
         res.redirect("/customer/mypage");
-      } else{
-          res.render("login", {loginFailed: true})
       } 
   });
 
@@ -32,11 +30,10 @@ router.post("/", async (req, res) => {
 
       res.cookie("token", accessToken);
       res.redirect("/cleaner/mypage");
-    } else{
-        res.render("login", {loginFailed: true})
     } 
   })
 
+  res.render("login", {loginFailed: true})
 
 });
 
