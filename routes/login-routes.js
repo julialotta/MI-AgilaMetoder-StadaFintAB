@@ -19,9 +19,9 @@ router.post("/", async (req, res) => {
         const accessToken = jwt.sign(userData, process.env.JWTSECRET);
         res.cookie("token", accessToken);
         res.redirect("/customer/mypage");
-      } else if(user && !comparePassword(password, user.hashedPassword)){
+      } else{
           res.render("login", {loginFailed: true})
-      }
+      } 
   });
 
   //Söker bland städare
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 
       res.cookie("token", accessToken);
       res.redirect("/cleaner/mypage");
-    } else if(cleaner && !comparePassword(password, cleaner.hashedPassword)){
+    } else{
         res.render("login", {loginFailed: true})
     } 
   })
