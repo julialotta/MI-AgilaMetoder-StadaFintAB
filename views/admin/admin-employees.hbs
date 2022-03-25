@@ -32,7 +32,7 @@
                         <td>{{time}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.adress}}</td>
-                        <td><a href="/admin/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
+                        <td><a href="" class="cancelBtn">Cancel</a></td>
 
                     </tr>
                     {{/each}}
@@ -41,7 +41,7 @@
             </table>
         </div>
 
-        <form action="/admin/employee/delete" method="post">
+        <form action="/employee/{{selectedEmployee}}/delete" method="post">
             <input type="submit" value="Delete account" class="deleteBtn" />
         </form>
 

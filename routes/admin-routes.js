@@ -1,14 +1,18 @@
 const express = require("express");
-router = express.Router();
+const router = express.Router();
 const jsonwebtoken = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const UsersModel = require("../models/UsersModel.js");
 const CleanersModel = require("../models/CleanersModel.js")
-const BookingsModel = require("../models/BookingsModel.js")
+const BookingsModel = require("../models/BookingsModel.js");
+const registerRouter = require("./register-routes.js");
+const utils = require("../utils");
 
 router.get("/customers", (req, res) => {
   res.render("admin/admin-clients");
 });
+
+// READ – Admin employee page
 
 router.get("/employees", async (req, res) => {
   const employees = await CleanersModel.find().lean()
@@ -17,6 +21,8 @@ router.get("/employees", async (req, res) => {
     employees
   });
 });
+
+// POST – Search for employee i select list
 
 router.post("/employees", async (req, res) => {
   const employees = await CleanersModel.find().lean()
@@ -30,7 +36,6 @@ router.post("/employees", async (req, res) => {
       }).populate("user")
       .lean()
 
-
       res.render("admin/admin-employees", {
         employees,
         selectedEmployee,
@@ -40,9 +45,32 @@ router.post("/employees", async (req, res) => {
   }
 })
 
-router.post("/employee/delete", async (req, res) => {
-  await BookingsModel.findById(req.params.id).deleteOne();
-  res.redirect("/employees");
+// READ – Create employee account
+
+router.get("/employee/create", (req, res) => {
+  res.render("admin/admin-employee-create")
+})
+
+// POST – Create employee account
+
+router.post("/employee/create", async (req, res) => {
+
+  const password = req.body.password;
+
+  const newCleaner = new CleanersModel({
+    name: req.body.name,
+    email: req.body.email,
+    hashedPassword: utils.hashPassword(password),
+  });
+  
+  await newCleaner.save();
+  res.redirect("/admin/employees")
+})
+
+// POST - Delete employee account
+router.post("/employee/:id/delete", async (req, res) => {
+  await CleanersModel.findById(req.params.id).deleteOne();
+  res.redirect("/admin/employees")
 })
 
 module.exports = router;

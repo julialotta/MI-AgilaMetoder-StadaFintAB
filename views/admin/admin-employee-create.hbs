@@ -1,0 +1,45 @@
+<div class="customer-admin-wrapper">
+    <div class="admin-register-employee-page">
+        <div class="admin-headlines">
+            <h2><a href="/customer/mypage">Customers</a> </h2>
+            <h2 class="employees"><a href="/customer/mypage/myaccount">
+                    Employees</a></h2>
+        </div>
+
+        <h3>Employee</h3>
+
+        <div class="employee-header">
+            {{> adminSelect}}
+            <span class="create-account"><a href="/admin/employee/create">Create new account +</a></span>
+        </div>
+
+        <div class="register-employee-form">
+
+            <div class="registerPage__section--form">
+                <h4>Create Account</h4>
+                {{#if error}}
+                <p class="error">{{error}}</p>
+                {{/if}}
+                <form action="/admin/employee/create" method="post">
+                    <div>
+                        <div>
+                            <label for="name">Name</label>
+                            <input type="text" placeholder="Name" name="name" id="name" required />
+                            <label for="email">E-mail</label>
+                            <input type="text" placeholder="E-mail" name="email" id="email" required />
+
+                            <label for="password">Password</label>
+                            <input type="password" placeholder="Password" name="password" id="password" required />
+
+                            <label for="confirmPassword">Repeat password</label>
+                            <input type="password" placeholder="Repeat password" name="confirmPassword"
+                                id="confirmPassword" required />
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Create" class="register-btn" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
