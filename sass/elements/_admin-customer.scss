@@ -60,6 +60,7 @@
       color: rgb(85, 85, 85);
       text-transform: lowercase;
       text-decoration: none;
+      font-size: 0.9rem;
 
       &:hover {
         border-bottom: 1px solid rgb(85, 85, 85);
@@ -101,10 +102,8 @@
 
       tbody>tr>td>.cancelBtn {
         @include mixins.btn(90, 6px, 40);
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding: 4px 15px;
+        font-size: 0.9rem;
       }
     }
   }
@@ -157,7 +156,7 @@
 
   .deletebtn {
     @include mixins.btn(300, 10px, 40);
-
+    font-size: 1rem;
     margin-bottom: 50px;
   }
 }
