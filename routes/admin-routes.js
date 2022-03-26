@@ -47,8 +47,12 @@ router.post("/employees", async (req, res) => {
 
 // READ – Create employee account
 
-router.get("/employee/create", (req, res) => {
-  res.render("admin/admin-employee-create")
+router.get("/employee/create", async (req, res) => {
+  const employees = await CleanersModel.find().lean()
+
+  res.render("admin/admin-employee-create", {
+    employees
+  })
 })
 
 // POST – Create employee account
