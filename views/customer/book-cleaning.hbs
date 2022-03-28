@@ -9,7 +9,7 @@
                 {{/if}}
                 <section class="bookings-section">
                     <p class="bookings-subheader">Date</p>
-                    <input type="date" name="date">
+                    <input type="date" name="date" min="{{restrictPastDates}}">
                 </section>
                 <section class="bookings-section">
                     <p class="bookings-subheader">Time</p>

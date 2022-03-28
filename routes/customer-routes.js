@@ -5,7 +5,7 @@ const UsersModel = require("../models/UsersModel.js");
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { getCleaner } = require("../utils.js");
+const { getCleaner, limitDate } = require("../utils.js");
 
 router.get("/", (req, res) => {
   if (!res.locals.loggedIn) {
@@ -72,13 +72,15 @@ router.get("/id:/remove", (req, res) => {});
 router.get("/book-cleaning", (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
+  const restrictPastDates = limitDate()
 
   if (tokenData == null) {
     res.redirect("/login");
   } else if (!tokenData.userId) {
     res.redirect("/unauthorized");
   } else {
-    res.render("customer/book-cleaning");
+    res.render("customer/book-cleaning", 
+    { restrictPastDates });
   }
 });
 
@@ -89,6 +91,7 @@ router.post("/book-cleaning", async (req, res) => {
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
   const randomCleaner = await getCleaner(date, time);
+
 
   if (date && time && randomCleaner) {
     const newBooking = new BookingsModel({
