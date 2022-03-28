@@ -9,8 +9,9 @@
       value="Choose"
       onchange="this.form.submit()"
     >
-      <option value="" disabled selected hidden>Choose customer...</option>
       {{#each allCustomers}}
+        <option value="" disabled selected hidden>Choose customer...</option>
+
         <option value="{{_id}}">{{name}}</option>
       {{/each}}
     </select>
@@ -35,7 +36,10 @@
               <td>{{date}}</td>
               <td>{{time}}</td>
               <td>{{cleaner.name}}</td>
-              <td><a href="/xxxx/{{_id}}/xxxx" class="cancelBtn">Cancel</a></td>
+              <td><a
+                  href="/admin/{{_id}}/deletecleaning"
+                  class="cancelBtn"
+                >Cancel</a></td>
             </tr>
           {{/each}}
 
@@ -45,48 +49,39 @@
 
   {{else}}
 
-    <h3>No schedules cleanings exists</h3>
-
   {{/if}}
 
   <h3>Information</h3>
-
   <div class="customer-admin-details">
 
-    {{#each selectedUser}}
-      <div class="mail-name">
-        <div>
-          <h4>Email</h4>
-          <p>{{email}}</p>
-        </div>
-        <div>
-          <h4>Adress</h4>
-          <p>{{adress}}</p>
-        </div>
+    <div class="mail-name">
+      <div>
+        <h4>Email</h4>
+        <p>{{userInfo.email}}</p>
       </div>
-    {{/each}}
+      <div>
+        <h4>Adress</h4>
+        <p>{{userInfo.adress}}</p>
+      </div>
+    </div>
 
-    {{#each selectedUser}}
-      <div class="adress-phone">
-        <div>
-          <h4>Name</h4>
-          <p>{{name}}</p>
-        </div>
-        <div>
-          <h4>Phone</h4>
-          <p>{{phone}}</p>
-        </div>
+    <div class="adress-phone">
+      <div>
+        <h4>Name</h4>
+        <p>{{userInfo.name}}</p>
       </div>
-    {{/each}}
+      <div>
+        <h4>Phone</h4>
+        <p>{{userInfo.phone}}</p>
+
+      </div>
+    </div>
 
   </div>
 
-  <form action="/admin/customer" method="post">
-    <input type="submit" value="Edit account" class="editBtn" />
-  </form>
+  <a href="/admin/{{userInfo._id}}/editaccount" class="editBtn">Edit account</a>
 
-  <form action="/admin/customer" method="post">
-    <input type="submit" value="Delete account" class="deleteBtn" />
-  </form>
+  <a href="/admin/{{userInfo._id}}/deleteaccount" class="deleteBtn">Delete
+    account</a>
 
 </div>
