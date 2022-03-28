@@ -9,12 +9,14 @@
   // SECTIONS //
   /////////////
   &__section {
+
     ///////////////////
     // LOGO SECTION //
     /////////////////
     &--logo {
       user-select: none;
       width: clamp(130px, 20vw, 180px);
+
       .clean-logo {
         content: url("../assets/cleaninc-logo.svg");
         width: 60%;
@@ -22,6 +24,7 @@
         margin-left: 60px;
       }
     }
+
     &--iconContainer {
       margin-right: 60px;
       @include mixins.flex(row, center, center);
@@ -33,11 +36,13 @@
         margin-right: 15px;
         height: fit-content;
       }
+
       .bookingSelected {
         content: url("../assets/bookings-icon-blue.svg");
         width: 70%;
         height: fit-content;
       }
+
       .profileSelected {
         content: url("../assets/profile-icon-blue.svg");
         fill: #25275a !important;
@@ -45,9 +50,26 @@
         margin-right: 15px;
         height: fit-content;
       }
+
       .bookingUnselected {
         content: url("../assets/bookings-icon-white.svg");
         width: 70%;
+        height: fit-content;
+      }
+
+      .cleanerSelected {
+        content: url("../assets/cleaner-icon-blue.svg");
+        fill: #25275a !important;
+        width: 65%;
+        margin-right: 15px;
+        height: fit-content;
+      }
+
+      .cleanerUnSelected {
+        content: url("../assets/cleaner-icon-white.svg");
+        fill: #25275a !important;
+        width: 65%;
+        margin-right: 15px;
         height: fit-content;
       }
     }

@@ -34,6 +34,7 @@ router.post("/employees", async (req, res) => {
       const bookings = await BookingsModel.find({
         cleaner: selectedEmployee
       }).populate("user")
+      .populate("cleaner")
       .lean()
 
       res.render("admin/admin-employees", {

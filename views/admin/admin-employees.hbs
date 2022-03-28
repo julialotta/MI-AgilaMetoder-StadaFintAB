@@ -1,4 +1,4 @@
-{{>adminHeader}}
+{{>adminHeaderEmployees}}
 
 <div class="customer-admin-wrapper">
     <div class="account-wrapper">
@@ -15,8 +15,11 @@
             {{> adminSelect}}
             <span class="create-account"><a href="/admin/employee/create">Create new account +</a></span>
         </div>
+
+        {{#if selectedEmployee}}
         <h3>Schedule</h3>
         <div class="customer-admin-table">
+            {{#if bookings}}
             <table class="customer-admin-styled">
                 <thead>
                     <tr>
@@ -39,7 +42,11 @@
 
                     </tr>
                     {{/each}}
+                    {{else}}
 
+                    <p class="no-bookings-placeholder">No bookings available.</p>
+
+                    {{/if}}
                 </tbody>
             </table>
         </div>
@@ -47,5 +54,5 @@
         <form action="/employee/{{selectedEmployee}}/delete" method="post">
             <input type="submit" value="Delete account" class="deleteBtn" />
         </form>
-
+        {{/if}}
     </div>
