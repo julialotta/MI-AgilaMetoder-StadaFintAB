@@ -85,8 +85,33 @@ router.get("/book-cleaning", (req, res) => {
 });
 
 // POST – BOOK A CLEANING //
+
 router.post("/book-cleaning", async (req, res) => {
   const { date, time } = req.body;
+  const randomCleaner = await getCleaner(date, time);
+
+  if (date && time) {
+    const bookingObject = {
+      date: date,
+      time: time,
+    };
+    res.render("customer/confirm-cleaning", { bookingObject });
+  } else if (!date && !time) {
+    const errorMessage = "Oops! Did you forget to pick a date and time?";
+    res.render("customer/book-cleaning", {
+      errorMessage,
+    });
+  } else if (!randomCleaner) {
+    const errorMessage =
+      "The time and date you've chosen is unfortunately fully booked. Please pick another time.";
+    res.render("customer/book-cleaning", {
+      errorMessage,
+    });
+  }
+});
+
+router.post("/confirm-cleaning", async (req, res) => {
+  const { date, time, cleaner } = req.body;
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
@@ -102,16 +127,9 @@ router.post("/book-cleaning", async (req, res) => {
     });
 
     await newBooking.save();
-
     res.redirect("/customer/mypage");
-  } else if (!date && !time) {
-    const errorMessage = "Oops! Did you forget to pick a date and time?";
-    res.render("customer/book-cleaning", {
-      errorMessage,
-    });
-  } else if (!randomCleaner) {
-    const errorMessage =
-      "The time and date you've chosen is unfortunately fully booked. Please pick another time.";
+  } else {
+    const errorMessage = "Oops! Something went wrong";
     res.render("customer/book-cleaning", {
       errorMessage,
     });

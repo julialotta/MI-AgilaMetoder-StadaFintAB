@@ -1,0 +1,16 @@
+{{>bookingsHeader}}
+<main class="bookings-main">
+<div class="modal-content">
+  <div class="modal-header">
+    <a href="/customer/book-cleaning">&times;</a>
+    <h2>Vill du boka den här tiden?</h2>
+  </div>
+  <div class="modal-body">
+        <form action="/customer/confirm-cleaning" method="post" class="bookings-form">
+            <input type="text" name="date" value="{{bookingObject.date}}" readonly>
+            <input type="text" name="time" value="{{bookingObject.time}}" readonly>
+            <input type="submit" value="Bekräfta">
+        </form>    
+    </div>
+</div>
+</main>
