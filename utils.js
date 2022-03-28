@@ -104,9 +104,17 @@ const getCleaner = async (date, time) => {
     return array[0]._id;
   }
 };
+
+const limitDate = () => {
+  let date = new Date().toISOString().split('T')[0]
+  return date
+}
+
+
 module.exports = {
   hashPassword,
   validateUser,
   comparePassword,
   getCleaner,
+  limitDate
 };
