@@ -77,4 +77,10 @@ router.post("/employee/:id/delete", async (req, res) => {
   res.redirect("/admin/employees")
 })
 
+// Cancel booking
+router.get("/bookings/:id/cancel", async (req, res) => {
+  await BookingsModel.findById(req.params.id).deleteOne();
+  res.redirect("/admin/employees")
+})
+
 module.exports = router;
