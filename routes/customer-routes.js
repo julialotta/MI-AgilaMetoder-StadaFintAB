@@ -20,7 +20,7 @@ router.get("/mypage", async (req, res) => {
 
   if (tokenData == null) {
     res.redirect("/login");
-  } else if (!tokenData.userId) {
+  } else if (!tokenData.userId || tokenData.admin) {
     res.redirect("/unauthorized");
   } else {
     const bookings = await BookingsModel.find({
@@ -48,7 +48,7 @@ router.get("/mypage/myaccount", async (req, res) => {
 
   if (tokenData == null) {
     res.redirect("/login");
-  } else if (!tokenData.userId) {
+  } else if (!tokenData.userId || tokenData.admin) {
     res.redirect("/unauthorized");
   } else {
     const user = await UsersModel.find({
@@ -60,11 +60,6 @@ router.get("/mypage/myaccount", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  if (!res.locals.loggedIn) {
-    res.redirect("login");
-  }
-});
 // POST - DELETE A BOOKING //
 router.get("/id:/remove", (req, res) => {});
 
@@ -75,7 +70,7 @@ router.get("/book-cleaning", (req, res) => {
 
   if (tokenData == null) {
     res.redirect("/login");
-  } else if (!tokenData.userId) {
+  } else if (!tokenData.userId || tokenData.admin) {
     res.redirect("/unauthorized");
   } else {
     res.render("customer/book-cleaning");
