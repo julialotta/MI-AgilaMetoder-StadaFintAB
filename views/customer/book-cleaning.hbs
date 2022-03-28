@@ -4,7 +4,9 @@
         <h1 class="bookings-header">Book a cleaning</h1>
         <div class="bookings-content">
             <form action="/customer/book-cleaning" method="post" class="bookings-form">
+                {{#if errorMessage}}
                 <p class="error-message">{{errorMessage}}</p>
+                {{/if}}
                 <section class="bookings-section">
                     <p class="bookings-subheader">Date</p>
                     <input type="date" name="date">
