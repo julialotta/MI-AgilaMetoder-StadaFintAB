@@ -100,11 +100,7 @@ router.post("/book-cleaning", async (req, res) => {
 
     await newBooking.save();
 
-    const bookings = await BookingsModel.find({ user: userId })
-      .populate("cleaner")
-      .lean();
-
-    res.render("customer/scheduled-cleanings", { bookings });
+    res.redirect("/customer/mypage");
   } else if (!date && !time) {
     const errorMessage = "Oops! Did you forget to pick a date and time?";
     res.render("customer/book-cleaning", {

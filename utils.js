@@ -1,9 +1,7 @@
 const bcrypt = require("bcrypt");
 const CleanersModel = require("./models/CleanersModel");
 const BookingsModel = require("./models/BookingsModel");
-const cleanerRoute = require("./routes/cleaner-route");
 const mongoose = require("mongoose");
-const { ObjectId } = require("mongodb");
 
 function validateUser(user) {
   let valid = true;
@@ -49,65 +47,60 @@ const getCleaner = async (date, time) => {
     }
   };
   shuffleArray(array);
-  //Kolla tillgänglihet
 
+  //Kolla tillgänglihet.
   if (bookings.length > 0) {
-    // om det finns bokningar:
-
-    //alla städare i listan kollas
+    //Alla 19 städare loopas
     for (let i = 0; i < array.length; i++) {
       let matchingIdArray = [];
       let matchingIdDateArray = [];
       let matchingIdDateTimeArray = [];
 
-      //för varje städare kollar vi om idt matchar någon bokning. om inte kan vi boka den
-
+      //Jämför ID med alla bokningar och vald städare
       for (let j = 0; j < bookings.length; j++) {
         if (bookings[j].cleaner.toString() === array[i]._id.toString()) {
           matchingIdArray.push(bookings[j]);
         }
       }
+      // Return om IDt inte finns
       if (matchingIdArray.length === 0) {
-        console.log("====================================");
-        console.log("id not same");
-        console.log("====================================");
+        console.log("Booked: ID not same");
         return array[i]._id;
       }
-      // annars om det finns matchande id, kollar vi datumen
+      // Jämför datum med valda städarens tidigare bokningar
       else {
         for (let k = 0; k < matchingIdArray.length; k++) {
-          if (matchingIdArray[k].date == date) {
+          if (matchingIdArray[k].date === date) {
             matchingIdDateArray.push(matchingIdArray[k]);
           }
         }
 
-        // om inget datum matchar där kan vi boka
+        // Return om datum inte finns
         if (matchingIdDateArray.length === 0) {
-          console.log("====================================");
-          console.log("date not same");
-          console.log("====================================");
+          console.log("Booked: Date not same");
           return array[i]._id;
-        } else {
+        }
+        // Jämför tid med valda städarens tidigare bokningar på samma datum
+        else {
           for (let l = 0; l < matchingIdDateArray.length; l++) {
             if (matchingIdDateArray[l].time === time) {
               matchingIdDateTimeArray.push(matchingIdDateArray[l]);
             }
           }
+          // Return om tiden inte finns
           if (matchingIdDateTimeArray.length === 0) {
-            console.log("====================================");
-            console.log("time not same");
-            console.log("====================================");
+            console.log("Booked: Time not same");
             return array[i]._id;
-          } else {
-            console.log("Inga tillgängliga av våra 19 städare");
+          }
+          // Vald städare inte tillgänglig. Loopen börjar om.
+          else {
+            console.log("Städaren inte tillgänglig");
           }
         }
       }
     }
   } else {
-    console.log("====================================");
-    console.log("first booking");
-    console.log("====================================");
+    console.log("Booked: first booking");
     return array[0]._id;
   }
 };
