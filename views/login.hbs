@@ -5,12 +5,16 @@
 
   <div class="login-page__section login-page__section--login">
     <h2>Sign in</h2>
+    <div class="loginNav">
+      <a class="loginType {{#if customer}}loginType__chosen{{/if}}" href="/login">Customer</a>
+      <a class="loginType {{#unless customer}}loginType__chosen{{/unless}}" href="/login/employee">Employee</a>
+    </div>
 
     {{#if loginFailed}}
       <span class="error">Incorrect username or password!</span>
     {{/if}}
+    <form class="login-form" action="/login{{#unless customer}}/cleaner{{/unless}}" method="post">
 
-    <form class="login-form" action="/login" method="post">
       <div class="form-input">
         <label for="email" class="input-title">E-mail</label>
         <input
