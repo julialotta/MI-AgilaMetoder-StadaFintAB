@@ -26,6 +26,7 @@
     &--login {
       @include mixins.flex(column, center, center, 1.125rem);
       width: 85%;
+      min-height: 65vh;
       border: 1.2px solid lightgray;
       border-radius: 6px;
       background-color: white;
@@ -38,7 +39,28 @@
         font-family: $fat-font;
       }
 
-      .error{
+      .loginNav {
+        @include mixins.flex(row, center, center, 0);
+        background-color: $lightgrey;
+        border: 3px solid $lightgrey;
+        border-radius: 4px;
+
+        .loginType {
+          border-radius: 4px;
+          margin: 0;
+          font-size: 0.8rem;
+          padding: 4px;
+          font-family: $skinny-font;
+          color: rgb(199, 196, 196);
+          text-decoration: none;
+          &__chosen {
+            background-color: white;
+            color: gray;
+          }
+        }
+      }
+
+      .error {
         font-family: $skinny-font;
         font-size: 0.8rem;
         color: rgb(152, 17, 17);
@@ -61,6 +83,10 @@
             font-family: $fat-font;
             font-weight: bold;
           }
+
+          //////////////////////////TEST SWITCH////////////////////////////
+
+          /////////////////////////////////////////////////////////////
         }
 
         .form-btn {
