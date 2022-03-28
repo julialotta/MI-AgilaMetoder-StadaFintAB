@@ -21,7 +21,11 @@ router.post("/", async (req, res) => {
         const userData = { userId: user._id, email };
         const accessToken = jwt.sign(userData, process.env.JWTSECRET);
         res.cookie("token", accessToken);
-        res.redirect("/customer/mypage");
+        if(!user.admin){
+          res.redirect("/customer/mypage");
+        }else if(user.admin){
+          res.redirect("/admin/customers")
+        }
       } else {
         res.render("login", {loginFailed: true, customer: true})
       }
