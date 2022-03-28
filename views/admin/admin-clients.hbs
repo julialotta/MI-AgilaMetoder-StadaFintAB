@@ -3,69 +3,86 @@
 
   <h3>Customer</h3>
 
-  <select name="xxx" id="xxx">
-    <option value="xxx">xxx</option>
-  </select>
+  <form>
+    <select
+      name="selectedList"
+      id="selectedList"
+      value="Choose"
+      onchange="document.location.href = '/admin/customers/' + this.value"
+    >
+      <option value="" disabled selected hidden>{{userInfo.name}}</option>
+      {{#each allCustomers}}
+
+        <option value="{{_id}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </form>
 
   <h3>Schedule</h3>
-  <div class="customer-admin-table">
-    <table class="customer-admin-styled">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Cleaner</th>
-          <th> </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>xxxx</td>
-          <td>xxxx</td>
-          <td>xxxx</td>
-          <td><a href="/customer/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
-        </tr>
+  {{#if bookingInfo}}
 
-      </tbody>
-    </table>
-  </div>
+    <div class="customer-admin-table">
+      <table class="customer-admin-styled">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Cleaner</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each bookingInfo}}
+            <tr>
+              <td>{{date}}</td>
+              <td>{{time}}</td>
+              <td>{{cleaner.name}}</td>
+              <td><a
+                  href="/admin/{{_id}}/deletebooking"
+                  class="cancelBtn"
+                >Cancel</a></td>
+            </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+
+  {{else}}
+
+  {{/if}}
 
   <h3>Information</h3>
-
   <div class="customer-admin-details">
 
-    {{!-- {{#each user}} --}}
     <div class="mail-name">
       <div>
         <h4>Email</h4>
-        <p>xxx</p>
+        <p>{{userInfo.email}}</p>
       </div>
       <div>
         <h4>Adress</h4>
-        <p>xxx</p>
+        <p>{{userInfo.adress}}</p>
       </div>
     </div>
 
     <div class="adress-phone">
       <div>
         <h4>Name</h4>
-        <p>xxx</p>
+        <p>{{userInfo.name}}</p>
       </div>
       <div>
         <h4>Phone</h4>
-        <p>xxx</p>
+        <p>{{userInfo.phone}}</p>
+
       </div>
     </div>
 
-    {{!-- {{/each}} --}}
   </div>
 
-  <form action="/admin/customer" method="post">
-    <input type="submit" value="Edit account" class="editBtn" />
-  </form>
+  <a href="/admin/{{userInfo._id}}/editaccount" class="editBtn">Edit account</a>
 
-  <form action="/admin/customer" method="post">
-    <input type="submit" value="Delete account" class="deleteBtn" />
-  </form>
+  <a href="/admin/{{userInfo._id}}/deleteaccount" class="deleteBtn">Delete
+    account</a>
 
 </div>
