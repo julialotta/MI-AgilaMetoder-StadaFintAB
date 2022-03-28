@@ -2,15 +2,15 @@
 
   <h3>Customer</h3>
 
-  <form action="/admin/customers" method="post">
+  <form>
     <select
       name="selectedList"
       id="selectedList"
       value="Choose"
-      onchange="this.form.submit()"
+      onchange="document.location.href = '/admin/customers/' + this.value"
     >
+      <option value="" disabled selected hidden>{{userInfo.name}}</option>
       {{#each allCustomers}}
-        <option value="" disabled selected hidden>Choose customer...</option>
 
         <option value="{{_id}}">{{name}}</option>
       {{/each}}
@@ -37,7 +37,7 @@
               <td>{{time}}</td>
               <td>{{cleaner.name}}</td>
               <td><a
-                  href="/admin/{{_id}}/deletecleaning"
+                  href="/admin/{{_id}}/deletebooking"
                   class="cancelBtn"
                 >Cancel</a></td>
             </tr>
