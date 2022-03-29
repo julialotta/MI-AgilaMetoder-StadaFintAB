@@ -9,7 +9,8 @@
   width: 70%;
   padding: 10px;
   margin: 0 auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
   animation-name: animatetop;
   animation-duration: 0.4s;
 
@@ -38,6 +39,7 @@
     width: 80%;
     padding: 10px;
     margin: 0 auto;
+    margin-bottom: 50px;
 
     form {
       @include mixins.flex(column, center, center, 10px);
