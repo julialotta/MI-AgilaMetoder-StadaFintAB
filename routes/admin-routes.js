@@ -129,4 +129,12 @@ router.get("/bookings/:id/cancel", async (req, res) => {
   res.redirect("/admin/employees");
 });
 
+// Logout
+router.get("/logout", async (req, res) => {
+  res.cookie("token", " ", {
+    maxAge: 0
+  });
+  res.redirect("/");
+})
+
 module.exports = router;
