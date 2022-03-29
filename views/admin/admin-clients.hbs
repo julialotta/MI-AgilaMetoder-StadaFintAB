@@ -63,44 +63,23 @@
   {{/if}}
 
   <h3>Information</h3>
-  <div class="customer-admin-details">
-
-
 
 <form action="/admin/customers/{{userInfo._id}}/edit" method="post">
-<input type="text" name="email" value="{{userInfo.email}}">
+
+  <div class="customer-admin-details">
+<div>
 <input type="text" name="name" value="{{userInfo.name}}">
 <input type="text" name="adress" value="{{userInfo.adress}}">
+</div>
+<div>
+<input type="text" name="email" value="{{userInfo.email}}">
 <input type="text" name="phone" value="{{userInfo.phone}}">
-<input type="submit" value="Edit account">
+</div>
+</div>
+<input class="editBtn" type="submit" value="Edit account">
 </form>
 
-
-{{!-- 
-    <div class="mail-name">
-      <div>
-        <h4>Email</h4>
-        <p>{{userInfo.email}}</p>
-      </div>
-      <div>
-        <h4>Adress</h4>
-        <p>{{userInfo.adress}}</p>
-      </div>
-    </div>
-
-    <div class="adress-phone">
-      <div>
-        <h4>Name</h4>
-        <p>{{userInfo.name}}</p>
-      </div>
-      <div>
-        <h4>Phone</h4>
-        <p>{{userInfo.phone}}</p>
-
-      </div>
-    </div> --}}
-
-  </div>
+  
 
 
   <a href="/admin/{{userInfo._id}}/deleteaccount" class="deleteBtn">Delete
