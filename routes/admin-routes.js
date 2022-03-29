@@ -47,8 +47,25 @@ router.get("/:id/deletebooking", async (req, res) => {
 });
 
 //edit ett konto
-router.get("/:id/editaccount", async (req, res) => {
-  res.redirect("xxxxxx");
+router.post("/customers/:id/edit", async (req, res) => {
+  const user = await UsersModel.findById(req.params.id).lean();
+  userEdit = user._id;
+  user.email = req.body.email;
+  user.name = req.body.name;
+  user.adress = req.body.adress;
+  user.phone = req.body.phone;
+
+  await UsersModel.findByIdAndUpdate(
+    { _id: user._id },
+    {
+      email: req.body.email,
+      name: req.body.name,
+      adress: req.body.adress,
+      phone: req.body.phone,
+    }
+  );
+
+  res.redirect("/admin/customers/" + userEdit);
 });
 
 //radera ett konto
