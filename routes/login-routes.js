@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
   
   UsersModel.findOne({ email }, (err, user) => {
       if (user && comparePassword(password, user.hashedPassword)){
-        const userData = { userId: user._id, email };
+        const userData = { userId: user._id, email, admin: user.admin};
         const accessToken = jwt.sign(userData, process.env.JWTSECRET);
         res.cookie("token", accessToken);
         if(!user.admin){
