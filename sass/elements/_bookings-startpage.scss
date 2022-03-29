@@ -6,7 +6,7 @@
   background-color: #fff;
   border: 1px solid lightgrey;
   border-radius: 15px;
-  width: 90%;
+  width: 70%;
   padding: 10px;
   margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -14,13 +14,20 @@
   animation-duration: 0.4s;
 
   .modal-header {
+    @include mixins.flex(column, center, center, 0);
     font-family: $fat-font;
     color: black;
     padding: 2px 16px;
-    a  {
+    position: relative;
+    width: 100%;
+
+    a {
       text-decoration: none;
+      color: black;
       position: absolute;
-      left: 100px;
+      right: 30px;
+      top: 5px;
+      font-size: 25px;
     }
   }
   .modal-body {
@@ -28,27 +35,32 @@
     background-color: #fff;
     border: 1px solid lightgrey;
     border-radius: 15px;
-    width: 90%;
+    width: 80%;
     padding: 10px;
     margin: 0 auto;
 
     form {
-      @include mixins.flex(column, center, center, 0);
-      width: 90%;
+      @include mixins.flex(column, center, center, 10px);
+      width: 70%;
       margin: 0 auto;
       padding: 10px;
+    }
 
-      @include for-tablet-landscape-up {
-        width: 70%;
-      }
-
-      input {
-        margin: 5px;
-        font-family: $skinny-font;
-      }
+    input[type="text"] {
+      text-align: center;
+      border: none;
+      margin: 10px 0;
+      border-bottom: 1.2px solid $grey;
+      font-family: $skinny-font;
+      cursor: default;
     }
     input[type="submit"] {
       @include mixins.btn(300, 10px, 40);
+      margin-top: 10px;
+    }
+    label {
+      font-family: $fat-font;
+      font-weight: bold;
     }
   }
 }
