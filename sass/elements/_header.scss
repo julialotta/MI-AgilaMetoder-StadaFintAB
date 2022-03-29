@@ -35,6 +35,10 @@
         width: 65%;
         margin-right: 15px;
         height: fit-content;
+
+        &:hover {
+          content: url("../assets/profile-icon-blue.svg");
+        }
       }
 
       .bookingSelected {
@@ -71,6 +75,22 @@
         width: 65%;
         margin-right: 15px;
         height: fit-content;
+
+        &:hover {
+          content: url("../assets/cleaner-icon-blue.svg");
+        }
+      }
+
+      .logoutUnSelected {
+        content: url("../assets/logout-icon-white.svg");
+        fill: #25275a !important;
+        width: 65%;
+        margin-right: 15px;
+        height: fit-content;
+
+        &:hover {
+          content: url("../assets/logout-icon-blue.svg");
+        }
       }
     }
   }
