@@ -38,8 +38,12 @@ router.get("/customers/:id", async (req, res) => {
 
 //radera en bokning
 router.get("/:id/deletebooking", async (req, res) => {
+  const booking = await BookingsModel.findById(req.params.id);
+  const user = booking.user;
+
   await BookingsModel.findById(req.params.id).deleteOne();
-  res.redirect("/admin/customers/");
+
+  res.redirect("/admin/customers/" + user);
 });
 
 //edit ett konto

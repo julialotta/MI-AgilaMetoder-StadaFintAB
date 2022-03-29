@@ -1,6 +1,13 @@
 {{>adminHeaderCustomers}}
 <div class="customer-admin-wrapper">
 
+<div class="admin-headlines">
+            <h2 class="customers"><a href="/admin/customers">Customers</a> </h2>
+            <h2><a href="/admin/employees">
+                    Employees</a></h2>
+        </div>
+
+
   <h3>Customer</h3>
 
   <form>
@@ -17,6 +24,9 @@
       {{/each}}
     </select>
   </form>
+
+{{#if userInfo}}
+ 
 
   <h3>Schedule</h3>
   {{#if bookingInfo}}
@@ -49,7 +59,7 @@
     </div>
 
   {{else}}
-
+<p>You have no bookings</p>
   {{/if}}
 
   <h3>Information</h3>
@@ -84,5 +94,11 @@
 
   <a href="/admin/{{userInfo._id}}/deleteaccount" class="deleteBtn">Delete
     account</a>
+
+    {{else}}
+
+    {{/if}}
+
+
 
 </div>
