@@ -1,7 +1,7 @@
 # Nice Clean Inc.
 Cleaning business booking app where customers, employees and admin can sign in and manage bookings. ✨💦
 
-## Screenshot
+![](./screenshot.jpg)
 
 
 ## Installation
