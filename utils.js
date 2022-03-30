@@ -84,7 +84,6 @@ const getCleaner = async (date, time) => {
         }
         // Return if date doesn't exist
         if (matchingIdDateArray.length === 0) {
-          console.log("Booked: Date not same");
           return array[i]._id;
         }
         // Compare time with the chosen cleaner's scheduled bookings

@@ -75,40 +75,48 @@
 
   .customer-admin-table {
     @include mixins.flex(column, center, center);
+    width: 90%;
+
+    @include for-tablet-landscape-up {
+      width: 70%;
+    }
+
+    @include for-desktop-up {
+      width: 50%;
+    }
+
     .customer-admin-styled {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 40px;
       margin-top: 30px;
-      @include for-tablet-landscape-up {
-        width: 220%;
-      }
 
-      thead > tr {
+      thead>tr {
         text-align: left;
       }
 
-      thead > tr > th {
+      thead>tr>th {
         font-family: $fat-font;
         padding-bottom: 25px;
         text-align: center;
       }
 
-      tbody > tr {
+      tbody>tr {
         border-bottom: 1px solid $grey;
       }
 
-      tbody > tr > td {
+      tbody>tr>td {
         font-family: $skinny-font;
         font-size: 0.7em;
         padding: 10px;
         text-align: center;
+
         @include for-tablet-landscape-up {
-          font-size: 0.7em;
+          font-size: 0.9em;
         }
       }
 
-      tbody > tr > td > .cancelBtn {
+      tbody>tr>td>.cancelBtn {
         @include mixins.btn(90, 6px, 40);
         padding: 4px 15px;
         font-size: 0.9rem;
@@ -121,6 +129,7 @@
       padding: 10px 0px;
     }
   }
+
   .no-bookings-placeholder {
     text-align: center;
     font-family: $skinny-font;
@@ -129,12 +138,16 @@
 
   form {
     @include mixins.flex(column, center, center, 0);
+
     .customer-admin-details {
       @include mixins.flex(column, center, center, 0);
+
       @include for-tablet-landscape-up {
         @include mixins.flex(row, center, center, 0);
       }
+
       padding-bottom: 50px;
+
       div {
         width: 200px;
         padding: 0px;
@@ -144,6 +157,7 @@
         align-items: center;
         gap: 10px;
         justify-content: center;
+
         input {
           width: 190px;
           height: 30px;
