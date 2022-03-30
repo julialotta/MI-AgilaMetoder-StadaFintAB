@@ -1,12 +1,11 @@
 const express = require("express");
-router = express.Router();
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const BookingsModel = require("../models/BookingsModel.js");
 
-//behövs dessa?
-require("jsonwebtoken");
-require("cookie-parser");
-
+///////////////////////
+// My page / Cleaner //
+///////////////////////
 router.get("/mypage", async (req, res) => {
   const {
     token
@@ -29,11 +28,14 @@ router.get("/mypage", async (req, res) => {
   }
 });
 
+////////////
+// Logout //
+////////////
 router.post("/log-out", (req, res) => {
-  //dubbelkolla att denna fungerar!
   res.cookie("token", " ", {
     maxAge: 0
   });
   res.redirect("/");
 });
+
 module.exports = router;

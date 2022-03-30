@@ -2,13 +2,16 @@
 
 <div class="customer-admin-wrapper">
     <div class="admin-register-employee-page">
+
+        <!-- HEADLINES -->
         <div class="admin-headlines">
             <h2><a href="/admin/customers">Customers</a> </h2>
             <h2><a href="/admin/employees">
                     Employees</a></h2>
         </div>
-        <div class="register-employee-form">
 
+        <!-- FORM-->
+        <div class="register-employee-form">
             <div class="registerPage__section--form">
                 <h4>Create Account</h4>
                 {{#if error}}
@@ -30,7 +33,6 @@
                                 id="confirmPassword" required />
                         </div>
                     </div>
-
                     <input type="submit" value="Create" class="register-btn" />
                 </form>
             </div>

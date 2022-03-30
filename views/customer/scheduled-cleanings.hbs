@@ -1,7 +1,7 @@
-  {{>myPageHeader}}
+{{>myPageHeader}}
 
 <div class="customer-wrapper">
-
+  <!-- HEADLINES -->
   <div class="customer-headlines">
     <h2 class="scheduledCleanings"><a href="/customer/mypage">Scheduled
         cleanings</a>
@@ -9,37 +9,34 @@
     <h2><a href="/customer/mypage/myaccount">My account</a></h2>
   </div>
 
+  <!-- SCHEDULE -->
   {{#if bookings}}
+  <div class="customer-table">
+    <table class="customer-styled">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Cleaner</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each bookings}}
+        <tr>
+          <td>{{date}}</td>
+          <td>{{time}}</td>
+          <td>{{cleaner.name}}</td>
+          <td><a href="/customer/{{_id}}/remove" class="cancelBtn">Cancel</a></td>
+        </tr>
+        {{/each}}
 
-    <div class="customer-table">
-      <table class="customer-styled">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Cleaner</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each bookings}}
-            <tr>
-              <td>{{date}}</td>
-              <td>{{time}}</td>
-              <td>{{cleaner.name}}</td>
-              <td><a
-                  href="/customer/{{_id}}/remove"
-                  class="cancelBtn"
-                >Cancel</a></td>
-            </tr>
-          {{/each}}
-
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
 
   {{else}}
-    <h2>You don't have any scheduled cleanings</h2>
+  <!-- PLACEHOLDER IS SCHEDULE IS EMPTY -->
+  <h2>You don't have any scheduled cleanings</h2>
   {{/if}}
-
 </div>

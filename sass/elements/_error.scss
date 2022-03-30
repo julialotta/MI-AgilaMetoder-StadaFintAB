@@ -1,5 +1,6 @@
 @use "../mixins";
 
+/* Unauthorized and 404 */
 .errorPage {
     @include mixins.flex(column, center, center);
     padding: 100px 0px;

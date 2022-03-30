@@ -5,14 +5,23 @@ const UsersModel = require("../models/UsersModel.js");
 const CleanersModel = require("../models/CleanersModel.js");
 const { comparePassword } = require(".././utils");
 
+///////////////////////////////////
+// Login page - customer & admin //
+//////////////////////////////////
 router.get("/", (req, res) => {
   res.render("login", {customer: true});
 });
 
+////////////////////////////
+// Login page - employee //
+///////////////////////////
 router.get("/employee", (req,res) => {
   res.render("login", {customer: false});
 })
 
+///////////////////////////////////
+// POST - login customer & admin //
+//////////////////////////////////
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
   
@@ -30,9 +39,11 @@ router.post("/", async (req, res) => {
         res.render("login", {loginFailed: true, customer: true})
       }
   });
-
-  
 });
+
+////////////////////////////
+// POST - login employee //
+////////////////////////////
 router.post("/cleaner", async (req,res) => {
   const { email, password } = req.body;
  
@@ -47,7 +58,6 @@ router.post("/cleaner", async (req,res) => {
       res.render("login", {loginFailed: true, customer: false})
     }
   }) 
-
 })
 
 module.exports = router;

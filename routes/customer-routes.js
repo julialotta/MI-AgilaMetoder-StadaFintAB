@@ -1,19 +1,23 @@
 require("dotenv").config();
 const BookingsModel = require("../models/BookingsModel.js");
 const UsersModel = require("../models/UsersModel.js");
-
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { getCleaner, limitDate } = require("../utils.js");
 
+///////////////////////////////
+// Redirect if not logged in //
+///////////////////////////////
 router.get("/", (req, res) => {
   if (!res.locals.loggedIn) {
     res.redirect("login");
   }
 });
 
-// GET - SCHEDULED-CLEANINGS FOR CUSTOMER //
+//////////////////////////////////////
+// Scheduled cleanings for customer //
+//////////////////////////////////////
 router.get("/mypage", async (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
@@ -35,13 +39,17 @@ router.get("/mypage", async (req, res) => {
   }
 });
 
-// DELETE A BOOKING FROM SCHEDULED-CLEANINGS //
+////////////////////
+// Cancel booking //
+////////////////////
 router.get("/:id/remove", async (req, res) => {
   await BookingsModel.findById(req.params.id).deleteOne();
   res.redirect("/customer/mypage");
 });
 
-// GET - MY-ACCOUNT FOR CUSTOMER //
+///////////////////////////
+// My account / customer //
+///////////////////////////
 router.get("/mypage/myaccount", async (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
@@ -60,15 +68,9 @@ router.get("/mypage/myaccount", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  if (!res.locals.loggedIn) {
-    res.redirect("login");
-  }
-});
-// POST - DELETE A BOOKING //
-router.get("/id:/remove", (req, res) => {});
-
-// GET - BOOK A CLEANING //
+////////////////////////////
+// GET - Book a cleaning //
+///////////////////////////
 router.get("/book-cleaning", (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
@@ -84,8 +86,9 @@ router.get("/book-cleaning", (req, res) => {
   }
 });
 
-// POST – BOOK A CLEANING //
-
+////////////////////////////
+// POST – Book a cleaning //
+////////////////////////////
 router.post("/book-cleaning", async (req, res) => {
   const { date, time } = req.body;
   const randomCleaner = await getCleaner(date, time);
@@ -110,13 +113,15 @@ router.post("/book-cleaning", async (req, res) => {
   }
 });
 
+//////////////////////
+// Confirm cleaning //
+//////////////////////
 router.post("/confirm-cleaning", async (req, res) => {
   const { date, time, cleaner } = req.body;
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
   const randomCleaner = await getCleaner(date, time);
-
 
   if (date && time && randomCleaner) {
     const newBooking = new BookingsModel({

@@ -3,6 +3,9 @@ const CleanersModel = require("./models/CleanersModel");
 const BookingsModel = require("./models/BookingsModel");
 const mongoose = require("mongoose");
 
+//////////////////////////
+// User Form Validation //
+//////////////////////////
 function validateUser(user) {
   let valid = true;
   valid = valid && user.name;
@@ -18,6 +21,9 @@ function validateUser(user) {
   return valid;
 }
 
+///////////////////
+// Hash password //
+///////////////////
 const hashPassword = (password) => {
   const hashValue = bcrypt.hashSync(password, 8);
   return hashValue;
@@ -27,13 +33,16 @@ const comparePassword = (password, hash) => {
   return correct;
 };
 
+/////////////////////////////////////////
+// Get cleaner and check availability ///
+/////////////////////////////////////////
 const getCleaner = async (date, time) => {
-  // Hämta alla städare från CleanersModel
+  // Get alla cleaners from CleanersModel
   let cleaners = await CleanersModel.find().lean();
-  // Hämta alla bokningar från BookingsModel
+  // Get all bookings from BookingsModel
   let bookings = await BookingsModel.find().lean();
 
-  // Skapa ny array i shufflad ordning
+  // Create new shuffled array 
   let array = [];
   for (let i = 0; i < cleaners.length; i++) {
     array.push(cleaners[i]);
@@ -48,51 +57,48 @@ const getCleaner = async (date, time) => {
   };
   shuffleArray(array);
 
-  //Kolla tillgänglihet.
+  // Check availability
   if (bookings.length > 0) {
-    //Alla 19 städare loopas
+    // Loop through all 19 cleaners
     for (let i = 0; i < array.length; i++) {
       let matchingIdArray = [];
       let matchingIdDateArray = [];
       let matchingIdDateTimeArray = [];
 
-      //Jämför ID med alla bokningar och vald städare
+      // Compare ID with all bookings and chosen cleaner
       for (let j = 0; j < bookings.length; j++) {
         if (bookings[j].cleaner.toString() === array[i]._id.toString()) {
           matchingIdArray.push(bookings[j]);
         }
       }
-      // Return om IDt inte finns
+      // Return if ID doesn't exist
       if (matchingIdArray.length === 0) {
-        console.log("Booked: ID not same");
         return array[i]._id;
       }
-      // Jämför datum med valda städarens tidigare bokningar
+      // Compare date with the chosen cleaner's scheduled bookings
       else {
         for (let k = 0; k < matchingIdArray.length; k++) {
           if (matchingIdArray[k].date === date) {
             matchingIdDateArray.push(matchingIdArray[k]);
           }
         }
-
-        // Return om datum inte finns
+        // Return if date doesn't exist
         if (matchingIdDateArray.length === 0) {
           console.log("Booked: Date not same");
           return array[i]._id;
         }
-        // Jämför tid med valda städarens tidigare bokningar på samma datum
+        // Compare time with the chosen cleaner's scheduled bookings
         else {
           for (let l = 0; l < matchingIdDateArray.length; l++) {
             if (matchingIdDateArray[l].time === time) {
               matchingIdDateTimeArray.push(matchingIdDateArray[l]);
             }
           }
-          // Return om tiden inte finns
+          // Return if time doesn't exist
           if (matchingIdDateTimeArray.length === 0) {
-            console.log("Booked: Time not same");
             return array[i]._id;
           }
-          // Vald städare inte tillgänglig. Loopen börjar om.
+          // Chosen cleaner not available. Loop starts over
           else {
             console.log("Städaren inte tillgänglig");
           }
@@ -100,16 +106,17 @@ const getCleaner = async (date, time) => {
       }
     }
   } else {
-    console.log("Booked: first booking");
     return array[0]._id;
   }
 };
 
+/////////////////////////////////////////////////////
+// Restrict past dates when booking a new cleaning //
+/////////////////////////////////////////////////////
 const limitDate = () => {
   let date = new Date().toISOString().split('T')[0]
   return date
 }
-
 
 module.exports = {
   hashPassword,

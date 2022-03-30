@@ -5,13 +5,18 @@ const CleanersModel = require("../models/CleanersModel.js");
 const BookingsModel = require("../models/BookingsModel.js");
 const utils = require("../utils");
 
-//hämta alla users/customers och rendera i selecion list
+///////////////////////////////////
+// Get all customers and render ///
+/// them in the select list ///////
+//////////////////////////////////
 router.get("/customers", async (req, res) => {
   const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
   res.render("admin/admin-clients", { allCustomers });
 });
 
-//hämta och ge ID i urlen
+/////////////////////
+// Get ID from URL //
+/////////////////////
 router.get("/customers/:id", async (req, res) => {
   const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
 
@@ -36,7 +41,9 @@ router.get("/customers/:id", async (req, res) => {
   }
 });
 
-//radera en bokning
+///////////////////////////////////////
+// Cancel booking from customer page //
+///////////////////////////////////////
 router.get("/:id/deletebooking", async (req, res) => {
   const booking = await BookingsModel.findById(req.params.id);
   const user = booking.user;
@@ -46,7 +53,9 @@ router.get("/:id/deletebooking", async (req, res) => {
   res.redirect("/admin/customers/" + user);
 });
 
-//edit ett konto
+/////////////////////////////
+// Edit a customer account //
+/////////////////////////////
 router.post("/customers/:id/edit", async (req, res) => {
   const user = await UsersModel.findById(req.params.id).lean();
   userEdit = user._id;
@@ -68,14 +77,17 @@ router.post("/customers/:id/edit", async (req, res) => {
   res.redirect("/admin/customers/" + userEdit);
 });
 
-//radera ett konto
+///////////////////////////////
+// Delete a customer account //
+//////////////////////////////
 router.get("/:id/deleteaccount", async (req, res) => {
   await UsersModel.findById(req.params.id).deleteOne();
   res.redirect("/admin/customers");
 });
 
-// READ – Admin employee page
-
+/////////////////////////////
+// Get admin employee page //
+/////////////////////////////
 router.get("/employees", async (req, res) => {
   const employees = await CleanersModel.find().lean();
 
@@ -84,8 +96,9 @@ router.get("/employees", async (req, res) => {
   });
 });
 
-// POST – Search for employee i select list
-
+////////////////////////////////////////
+// Search for employee in select list //
+////////////////////////////////////////
 router.post("/employees", async (req, res) => {
   const employees = await CleanersModel.find().lean();
 
@@ -109,8 +122,9 @@ router.post("/employees", async (req, res) => {
   }
 });
 
-// READ – Create employee account
-
+//////////////////////////////////////////
+// GET for creating an employee account //
+//////////////////////////////////////////
 router.get("/employee/create", async (req, res) => {
   const employees = await CleanersModel.find().lean();
 
@@ -119,8 +133,9 @@ router.get("/employee/create", async (req, res) => {
   });
 });
 
-// POST – Create employee account
-
+///////////////////////////////////////////
+// POST for creating an employee account //
+///////////////////////////////////////////
 router.post("/employee/create", async (req, res) => {
   const password = req.body.password;
 
@@ -134,19 +149,25 @@ router.post("/employee/create", async (req, res) => {
   res.redirect("/admin/employees");
 });
 
-// POST - Delete employee account
+////////////////////////////
+//Delete employee account//
+///////////////////////////
 router.post("/employee/:id/delete", async (req, res) => {
   await CleanersModel.findById(req.params.id).deleteOne();
   res.redirect("/admin/employees");
 });
 
-// Cancel booking
+////////////////////////////////////////////////
+/// Cancel booking from admin/employee page ////
+///////////////////////////////////////////////
 router.get("/bookings/:id/cancel", async (req, res) => {
   await BookingsModel.findById(req.params.id).deleteOne();
   res.redirect("/admin/employees");
 });
 
-// Logout
+////////////
+// Logout //
+///////////
 router.get("/logout", async (req, res) => {
   res.cookie("token", " ", {
     maxAge: 0
