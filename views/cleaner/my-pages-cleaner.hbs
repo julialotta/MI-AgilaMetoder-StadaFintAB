@@ -4,24 +4,31 @@
 
   <div class="cleaner-table">
     <table class="cleaner-styled">
+        {{#if cleanings}}
       <thead>
-
         <tr>
-          <th>Date</th>
-          <th>Time</th>
           <th>Customer</th>
           <th>Location</th>
+          <th>Date</th>
+          <th>Time</th>
         </tr>
       </thead>
       <tbody>
-        {{#each cleanings}}
+          {{#each cleanings}}
+            <tr>
+              <td>{{user.name}}</td>
+              <td>{{user.adress}}</td>
+              <td>{{date}}</td>
+              <td>{{time}}</td>
+            </tr>
+          {{/each}}
+        {{else}}
+        <thead>
           <tr>
-            <td>{{date}}</td>
-            <td>{{time}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.adress}}</td>
+            <th>No bookings</th>
           </tr>
-        {{/each}}
+        </thead>
+        {{/if}}
       </tbody>
     </table>
   </div>

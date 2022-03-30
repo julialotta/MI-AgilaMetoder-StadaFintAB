@@ -114,6 +114,10 @@
       @include mixins.flex(column, center, center, 0);
       padding: 10px 0px;
       width: 100%;
+
+      > div {
+        @include mixins.flex(column, center, start, 0);
+      }
     }
 
     .bookings-header {

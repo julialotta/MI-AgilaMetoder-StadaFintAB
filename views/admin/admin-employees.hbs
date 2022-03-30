@@ -1,7 +1,6 @@
 {{>adminHeaderEmployees}}
 
 <div class="customer-admin-wrapper">
-    <div class="account-wrapper">
 
         <div class="admin-headlines">
             <h2><a href="/admin/customers">Customers</a> </h2>
@@ -23,10 +22,10 @@
             <table class="customer-admin-styled">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Time</th>
                         <th>Customer</th>
                         <th>Location</th>
+                        <th>Date</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
 
@@ -34,10 +33,10 @@
                     {{#each bookings}}
                     <tr>
 
-                        <td>{{date}}</td>
-                        <td>{{time}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.adress}}</td>
+                        <td>{{date}}</td>
+                        <td>{{time}}</td>
                         <td><a href="/admin/bookings/{{_id}}/cancel" class="cancelBtn">Cancel</a></td>
 
                     </tr>
@@ -55,4 +54,4 @@
             <input type="submit" value="Delete account" class="deleteBtn" />
         </form>
         {{/if}}
-    </div>
+    

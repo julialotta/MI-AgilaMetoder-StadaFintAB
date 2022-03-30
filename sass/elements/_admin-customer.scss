@@ -54,8 +54,7 @@
   }
 
   .employee-header {
-    @include mixins.flex(row, center, center);
-    gap: 20px;
+    @include mixins.flex(row, center, center, 20px);
   }
 
   .create-account {
@@ -75,14 +74,15 @@
   }
 
   .customer-admin-table {
-    width: 400px;
-
+    @include mixins.flex(column, center, center);
     .customer-admin-styled {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 40px;
-      margin-top: 21px;
-      font-size: 1em;
+      margin-top: 30px;
+      @include for-tablet-landscape-up {
+        width: 220%;
+      }
 
       thead > tr {
         text-align: left;
@@ -90,9 +90,8 @@
 
       thead > tr > th {
         font-family: $fat-font;
-        padding-left: 15px;
-        padding-bottom: 15px;
-        width: 25%;
+        padding-bottom: 25px;
+        text-align: center;
       }
 
       tbody > tr {
@@ -101,9 +100,12 @@
 
       tbody > tr > td {
         font-family: $skinny-font;
-        font-size: 0.9em;
-        padding: 15px;
-        width: 25%;
+        font-size: 0.7em;
+        padding: 10px;
+        text-align: center;
+        @include for-tablet-landscape-up {
+          font-size: 0.7em;
+        }
       }
 
       tbody > tr > td > .cancelBtn {
@@ -121,13 +123,12 @@
   }
 
   form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include mixins.flex(column, center, center, 0);
     .customer-admin-details {
-      width: 500px;
-      display: flex;
-      justify-content: center;
+      @include mixins.flex(column, center, center, 0);
+      @include for-tablet-landscape-up {
+        @include mixins.flex(row, center, center, 0);
+      }
       padding-bottom: 50px;
       div {
         width: 200px;
@@ -163,18 +164,6 @@
     padding-bottom: 10px;
     margin-bottom: 50px;
     font-size: 1rem;
-  }
-}
-
-@include mixins.for-tablet-landscape-up {
-  .customer-admin-wrapper {
-    .customer-admin-table {
-      width: 638px;
-
-      .customer-admin-styled {
-        font-size: 1.2em;
-      }
-    }
   }
 }
 
