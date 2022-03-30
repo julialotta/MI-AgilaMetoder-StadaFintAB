@@ -18,7 +18,7 @@
     @include mixins.flex(column, center, center, 0);
     font-family: $fat-font;
     color: black;
-    padding: 2px 16px;
+    padding: 5px 16px;
     position: relative;
     width: 100%;
 
@@ -26,9 +26,12 @@
       text-decoration: none;
       color: black;
       position: absolute;
-      right: 30px;
-      top: 5px;
+      right: 25px;
+      top: 3px;
       font-size: 25px;
+    }
+    h2 {
+      padding-top: 20px;
     }
   }
   .modal-body {
@@ -38,7 +41,7 @@
     width: 80%;
     padding: 10px;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 
     form {
       @include mixins.flex(column, center, center, 10px);
@@ -56,8 +59,12 @@
       cursor: default;
     }
     input[type="submit"] {
-      @include mixins.btn(300, 10px, 40);
+      @include mixins.btn(150, 10px, 40);
       margin-top: 10px;
+      @include for-tablet-landscape-up {
+        @include mixins.btn(250, 10px, 40);
+        margin-top: 20px;
+      }
     }
     label {
       font-family: $fat-font;
