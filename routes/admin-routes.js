@@ -3,6 +3,7 @@ const router = express.Router();
 const UsersModel = require("../models/UsersModel.js");
 const CleanersModel = require("../models/CleanersModel.js");
 const BookingsModel = require("../models/BookingsModel.js");
+const jwt = require("jsonwebtoken");
 const utils = require("../utils");
 
 ///////////////////////////////////
@@ -10,33 +11,53 @@ const utils = require("../utils");
 /// them in the select list ///////
 //////////////////////////////////
 router.get("/customers", async (req, res) => {
-  const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
-  res.render("admin/admin-clients", { allCustomers });
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  } else {
+    const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
+    res.render("admin/admin-clients", { allCustomers });
+  }
 });
 
 /////////////////////
 // Get ID from URL //
 /////////////////////
 router.get("/customers/:id", async (req, res) => {
-  const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  for (let i = 0; i < allCustomers.length; i++) {
-    if (req.params.id == allCustomers[i]._id) {
-      const selectedUser = allCustomers[i]._id;
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  } else {
+    const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
 
-      const bookingInfo = await BookingsModel.find({
-        user: selectedUser,
-      })
-        .populate("cleaner")
-        .lean();
+    for (let i = 0; i < allCustomers.length; i++) {
+      if (req.params.id == allCustomers[i]._id) {
+        const selectedUser = allCustomers[i]._id;
 
-      const userInfo = await UsersModel.findById({ _id: selectedUser }).lean();
+        const bookingInfo = await BookingsModel.find({
+          user: selectedUser,
+        })
+          .populate("cleaner")
+          .lean();
 
-      res.render("admin/admin-clients", {
-        allCustomers,
-        bookingInfo,
-        userInfo,
-      });
+        const userInfo = await UsersModel.findById({
+          _id: selectedUser,
+        }).lean();
+
+        res.render("admin/admin-clients", {
+          allCustomers,
+          bookingInfo,
+          userInfo,
+        });
+      }
     }
   }
 });
@@ -45,12 +66,21 @@ router.get("/customers/:id", async (req, res) => {
 // Cancel booking from customer page //
 ///////////////////////////////////////
 router.get("/:id/deletebooking", async (req, res) => {
-  const booking = await BookingsModel.findById(req.params.id);
-  const user = booking.user;
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  await BookingsModel.findById(req.params.id).deleteOne();
-
-  res.redirect("/admin/customers/" + user);
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    const booking = await BookingsModel.findById(req.params.id);
+    const user = booking.user;
+  
+    await BookingsModel.findById(req.params.id).deleteOne();
+  
+    res.redirect("/admin/customers/" + user);
+  }
 });
 
 /////////////////////////////
@@ -89,11 +119,20 @@ router.get("/:id/deleteaccount", async (req, res) => {
 // Get admin employee page //
 /////////////////////////////
 router.get("/employees", async (req, res) => {
-  const employees = await CleanersModel.find().lean();
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  res.render("admin/admin-employees", {
-    employees,
-  });
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    const employees = await CleanersModel.find().lean();
+  
+    res.render("admin/admin-employees", {
+      employees,
+    });
+  }
 });
 
 ////////////////////////////////////////
@@ -126,11 +165,20 @@ router.post("/employees", async (req, res) => {
 // GET for creating an employee account //
 //////////////////////////////////////////
 router.get("/employee/create", async (req, res) => {
-  const employees = await CleanersModel.find().lean();
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  res.render("admin/admin-employee-create", {
-    employees,
-  });
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    const employees = await CleanersModel.find().lean();
+  
+    res.render("admin/admin-employee-create", {
+      employees,
+    });
+  }
 });
 
 ///////////////////////////////////////////
@@ -161,8 +209,17 @@ router.post("/employee/:id/delete", async (req, res) => {
 /// Cancel booking from admin/employee page ////
 ///////////////////////////////////////////////
 router.get("/bookings/:id/cancel", async (req, res) => {
-  await BookingsModel.findById(req.params.id).deleteOne();
-  res.redirect("/admin/employees");
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    await BookingsModel.findById(req.params.id).deleteOne();
+    res.redirect("/admin/employees");
+  }
 });
 
 ////////////
@@ -170,9 +227,9 @@ router.get("/bookings/:id/cancel", async (req, res) => {
 ///////////
 router.get("/logout", async (req, res) => {
   res.cookie("token", " ", {
-    maxAge: 0
+    maxAge: 0,
   });
   res.redirect("/");
-})
+});
 
 module.exports = router;

@@ -12,6 +12,8 @@ const registerroutes = require("./routes/register-routes.js");
 const adminRoute = require("./routes/admin-routes.js");
 const cleanerRoute = require("./routes/cleaner-route.js");
 const jwt = require("jsonwebtoken");
+const UsersModel = require("./models/UsersModel.js");
+
 const app = express();
 
 app.engine(
@@ -44,16 +46,19 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
   if (tokenData === null) {
     res.redirect("login");
-  } else if (tokenData.userId) {
+  } else if (tokenData.userId && !tokenData.admin) {
     const userId = tokenData.userId;
     res.render("customer/scheduled-cleanings", { userId });
-  } else {
+  } else if(tokenData.userId && tokenData.admin){
+    const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
+    res.render("admin/admin-clients", { allCustomers });
+  }else {
     res.redirect("cleaner/mypage");
   }
 });

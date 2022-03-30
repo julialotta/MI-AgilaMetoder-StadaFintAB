@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
       if (utils.validateUser(newUser)) {
         await newUser.save();
         UsersModel.findOne({ email }, (err, user) => {
-          const userData = { userId: user._id, email };
+          const userData = { userId: user._id, email, admin: user.admin };
           const accessToken = jwt.sign(userData, process.env.JWTSECRET);
           res.cookie("token", accessToken);
           res.redirect("/");
