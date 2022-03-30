@@ -135,6 +135,35 @@ router.get("/employees", async (req, res) => {
   }
 });
 
+///////////////////////////
+// Get specific employee //
+///////////////////////////
+router.get("/employees/:id", async (req, res) => {
+  const employees = await CleanersModel.find().lean();
+  const specificEmployee = await CleanersModel.findById(req.params.id).lean();
+  const employeeName = specificEmployee.name;
+
+  for (let i = 0; i < employees.length; i++) {
+    if (req.params.id == employees[i]._id) {
+      let selectedEmployee = employees[i]._id;
+
+      const bookings = await BookingsModel.find({
+          cleaner: selectedEmployee,
+        })
+        .populate("user")
+        .populate("cleaner")
+        .lean();
+
+      res.render("admin/admin-employees", {
+        employees,
+        selectedEmployee,
+        bookings,
+        employeeName
+      });
+    }
+  }
+});
+
 ////////////////////////////////////////
 // Search for employee in select list //
 ////////////////////////////////////////
@@ -208,19 +237,21 @@ router.post("/employee/:id/delete", async (req, res) => {
 ////////////////////////////////////////////////
 /// Cancel booking from admin/employee page ////
 ///////////////////////////////////////////////
-router.get("/bookings/:id/cancel", async (req, res) => {
-  const { token } = req.cookies;
+router.get("/bookings/:bookingid/:cleanerid/cancel", async (req, res) => {
+  const {
+    token
+  } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
-
+  
   if (tokenData == null) {
     res.redirect("/login");
   } else if (!tokenData.admin) {
     res.redirect("/unauthorized");
-  }else{
-    await BookingsModel.findById(req.params.id).deleteOne();
-    res.redirect("/admin/employees");
+  } else {
+    await BookingsModel.findById(req.params.bookingid).deleteOne();
+    res.redirect("/admin/employees/" + req.params.cleanerid);
   }
-});
+  });
 
 ////////////
 // Logout //
