@@ -29,7 +29,7 @@ router.get("/mypage", async (req, res) => {
 });
 
 ////////////
-// LOGOUT //
+// Logout //
 ////////////
 router.post("/log-out", (req, res) => {
   res.cookie("token", " ", {
@@ -37,4 +37,5 @@ router.post("/log-out", (req, res) => {
   });
   res.redirect("/");
 });
+
 module.exports = router;

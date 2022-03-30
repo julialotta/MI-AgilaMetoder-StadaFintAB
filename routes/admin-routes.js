@@ -14,9 +14,9 @@ router.get("/customers", async (req, res) => {
   res.render("admin/admin-clients", { allCustomers });
 });
 
-//////////////////////////
-// Get ID from the URL //
-/////////////////////////
+/////////////////////
+// Get ID from URL //
+/////////////////////
 router.get("/customers/:id", async (req, res) => {
   const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
 
@@ -157,17 +157,17 @@ router.post("/employee/:id/delete", async (req, res) => {
   res.redirect("/admin/employees");
 });
 
-//////////////////////////////////////////////
-///Cancel booking from admin/employee page////
-/////////////////////////////////////////////
+////////////////////////////////////////////////
+/// Cancel booking from admin/employee page ////
+///////////////////////////////////////////////
 router.get("/bookings/:id/cancel", async (req, res) => {
   await BookingsModel.findById(req.params.id).deleteOne();
   res.redirect("/admin/employees");
 });
 
+////////////
+// Logout //
 ///////////
-//Logout//
-//////////
 router.get("/logout", async (req, res) => {
   res.cookie("token", " ", {
     maxAge: 0
