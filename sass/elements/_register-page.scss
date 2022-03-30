@@ -15,8 +15,8 @@
 
     &--logo {
       user-select: none;
-      width: clamp(130px, 20vw, 180px);
       margin: 40px;
+      width: clamp(150px, 35vw, 180px);
       .clean-logo {
         content: url("../assets/cleaninc-logo.svg");
         width: 100%;
@@ -25,19 +25,27 @@
     }
 
     &--form {
-      @include mixins.flex(column, start, center);
-      background-color: white;
-      border: 1.2px solid $grey;
-      border-radius: 6px;
+      @include mixins.flex(column, start, center, 1.2rem);
       width: 85%;
+      min-height: 65vh;
+      border: 1.2px solid lightgray;
+      border-radius: 6px;
+      background-color: white;
+
       @include mixins.for-tablet-landscape-up {
         max-width: 450px;
       }
+      h2 {
+        font-family: $fat-font;
+        padding-top: 20px;
+      }
 
       form {
+        @include mixins.flex(column, center, center);
         label {
           font-family: $fat-font;
           font-weight: bold;
+          margin-top: 10px;
         }
         input {
           font-size: 14px;
@@ -51,11 +59,10 @@
           color: $grey;
           font-family: $skinny-font;
         }
-        @include mixins.flex(column, center, center);
 
         > div {
           @include mixins.flex(column, center, center);
-          margin: 10px 0 40px 0;
+          margin: 5px 0 40px 0;
 
           @include for-phone-landscape-up {
             @include mixins.flex(row, center, center);
@@ -64,15 +71,9 @@
           > div {
             font-family: $skinny-font;
             margin: 0 30px;
-
             @include mixins.flex(column, center, start);
           }
         }
-      }
-      h4 {
-        font-family: $fat-font;
-        font-weight: 800;
-        font-size: 24px;
       }
 
       .error {

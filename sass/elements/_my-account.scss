@@ -28,40 +28,53 @@
   }
 
   .account-details {
-    width: 500px;
+    width: 320px;
     display: flex;
+    justify-content: space-between;
+    @include for-tablet-landscape-up {
+      width: 500px;
+    }
 
     .mail-name {
-      width: 50%;
-      padding-left: 70px;
       div > h4 {
         font-family: $fat-font;
-        font-size: 1.2em;
+        font-size: 0.9em;
         margin: 0px;
         padding-top: 20px;
+
+        @include for-tablet-landscape-up {
+          font-size: 1em;
+        }
       }
       div > p {
         font-family: $fat-font;
-        font-size: 1.2em;
+        font-size: 1.1em;
         margin: 0px;
         padding: 0px;
+        @include for-tablet-landscape-up {
+          font-size: 1.3em;
+        }
       }
     }
 
     .adress-phone {
-      padding-left: 70px;
-      width: 50%;
       div > h4 {
         font-family: $fat-font;
-        font-size: 1.2em;
+        font-size: 0.9em;
         margin: 0px;
         padding-top: 20px;
+        @include for-tablet-landscape-up {
+          font-size: 1em;
+        }
       }
       div > p {
         font-family: $fat-font;
-        font-size: 1.2em;
+        font-size: 1.1em;
         margin: 0px;
         padding: 0px;
+        @include for-tablet-landscape-up {
+          font-size: 1.3em;
+        }
       }
     }
   }

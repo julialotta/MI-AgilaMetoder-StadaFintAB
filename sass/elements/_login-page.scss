@@ -1,7 +1,7 @@
 @use "../mixins";
 
 .login-page {
-  @include mixins.flex(column, center, center, 2rem);
+  @include mixins.flex(column, start, center);
 
   background-color: $lightgrey;
   min-height: 100vh;
@@ -16,6 +16,7 @@
     /////////////////
     &--logo {
       user-select: none;
+      margin: 40px;
       width: clamp(150px, 35vw, 180px);
 
       .clean-logo {
@@ -26,7 +27,7 @@
     }
 
     &--login {
-      @include mixins.flex(column, center, center, 1.125rem);
+      @include mixins.flex(column, start, center, 1.2rem);
       width: 85%;
       min-height: 65vh;
       border: 1.2px solid lightgray;
@@ -39,6 +40,7 @@
 
       h2 {
         font-family: $fat-font;
+        padding-top: 20px;
       }
 
       .loginNav {
@@ -87,6 +89,7 @@
           label {
             font-family: $fat-font;
             font-weight: bold;
+            margin-top: 10px;
           }
         }
 

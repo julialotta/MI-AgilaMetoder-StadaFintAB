@@ -10,47 +10,38 @@
   }
 
   .cleaner-table {
-    width: 400px;
+    @include mixins.flex(column, center, center);
     .cleaner-styled {
-      width: 100%;
+      width: 120%;
       border-collapse: collapse;
       margin-bottom: 40px;
       margin-top: 30px;
-      font-size: 1em;
+      @include mixins.for-tablet-landscape-up {
+        width: 190%;
+      }
+
       thead > tr {
         text-align: left;
       }
       thead > tr > th {
         font-family: $fat-font;
-        padding-left: 15px;
-        padding-bottom: 15px;
-        width: 25%;
+        padding-bottom: 25px;
+        text-align: center;
       }
       tbody > tr {
         border-bottom: 1px solid $grey;
       }
       tbody > tr > td {
         font-family: $skinny-font;
-        font-size: 0.9em;
-        padding: 15px;
-        width: 25%;
+        font-size: 0.7em;
+        padding: 10px 0;
+        text-align: center;
       }
     }
   }
   .logout-div {
     form > input {
-      @include mixins.btn(300, 10px, 50);
-    }
-  }
-}
-
-@include mixins.for-tablet-landscape-up {
-  .cleaner-wrapper {
-    .cleaner-table {
-      width: 638px;
-      .cleaner-styled {
-        font-size: 1.2em;
-      }
+      @include mixins.btn(100, 10px, 50);
     }
   }
 }

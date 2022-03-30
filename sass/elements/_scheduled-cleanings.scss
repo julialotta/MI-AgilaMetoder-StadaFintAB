@@ -26,7 +26,7 @@
   }
 
   .customer-table {
-    width: 400px;
+    width: 300px;
     .customer-styled {
       width: 100%;
       border-collapse: collapse;
@@ -47,7 +47,7 @@
       }
       tbody > tr > td {
         font-family: $skinny-font;
-        font-size: 0.9em;
+        font-size: 0.75em;
         padding: 15px;
         width: 25%;
       }

@@ -25,28 +25,33 @@
   {{#if userInfo}}
   <h3>Schedule</h3>
   {{#if bookingInfo}}
-  <div class="customer-admin-table">
-    <table class="customer-admin-styled">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Cleaner</th>
-          <th> </th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each bookingInfo}}
-        <tr>
-          <td>{{date}}</td>
-          <td>{{time}}</td>
-          <td>{{cleaner.name}}</td>
-          <td><a href="/admin/{{_id}}/deletebooking" class="cancelBtn">Cancel</a></td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
+    <div class="customer-admin-table">
+      <table class="customer-admin-styled">
+        <thead>
+          <tr>
+            <th>Cleaner</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each bookingInfo}}
+            <tr>
+              <td>{{cleaner.name}}</td>
+              <td>{{date}}</td>
+              <td>{{time}}</td>
+              <td><a
+                  href="/admin/{{_id}}/deletebooking"
+                  class="cancelBtn"
+                >Cancel</a></td>
+            </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+
   {{else}}
   <h4 class="no-bookings-placeholder">No bookings available</h4>
   {{/if}}

@@ -74,15 +74,14 @@ router.get("/mypage/myaccount", async (req, res) => {
 router.get("/book-cleaning", (req, res) => {
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
-  const restrictPastDates = limitDate()
+  const restrictPastDates = limitDate();
 
   if (tokenData == null) {
     res.redirect("/login");
   } else if (!tokenData.userId) {
     res.redirect("/unauthorized");
   } else {
-    res.render("customer/book-cleaning", 
-    { restrictPastDates });
+    res.render("customer/book-cleaning", { restrictPastDates });
   }
 });
 
@@ -99,8 +98,8 @@ router.post("/book-cleaning", async (req, res) => {
       time: time,
     };
     res.render("customer/confirm-cleaning", { bookingObject });
-  } else if (!date && !time) {
-    const errorMessage = "Oops! Did you forget to pick a date and time?";
+  } else if (!date || !time) {
+    const errorMessage = "Oops! Did you forget to pick a time or date?";
     res.render("customer/book-cleaning", {
       errorMessage,
     });
@@ -117,7 +116,7 @@ router.post("/book-cleaning", async (req, res) => {
 // Confirm cleaning //
 //////////////////////
 router.post("/confirm-cleaning", async (req, res) => {
-  const { date, time, cleaner } = req.body;
+  const { date, time } = req.body;
   const { token } = req.cookies;
   const tokenData = jwt.decode(token, process.env.JWTSECRET);
   const userId = tokenData.userId;
