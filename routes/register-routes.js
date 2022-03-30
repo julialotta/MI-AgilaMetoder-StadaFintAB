@@ -2,13 +2,18 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const UsersModel = require("../models/UsersModel.js");
-//const CleanersModel = require("../models/CleanersModel.js");
 const utils = require("../utils");
 
+/////////////////////////
+// GET - Register page //
+////////////////////////
 router.get("/", async (req, res) => {
   res.render("register");
 });
 
+//////////////////////////
+// POST - Register page //
+//////////////////////////
 router.post("/", async (req, res) => {
   const { email, name, adress, phone, password, confirmPassword } = req.body;
 
@@ -50,22 +55,5 @@ router.post("/", async (req, res) => {
     }
   });
 });
-
-/////////////////
-//POST CLEANER//
-///////////////
-// router.post("/cleaner", async (req,res) => {
-//   //const { email, name, password } = req.body;
-//   const password = req.body.password;
-
-//   const newCleaner = new CleanersModel({
-//     name: req.body.name,
-//     email: req.body.email,
-//     hashedPassword: utils.hashPassword(password),
-//   });
-  
-//   await newCleaner.save();
-//   res.sendStatus(200);
-// })
 
 module.exports = router;
