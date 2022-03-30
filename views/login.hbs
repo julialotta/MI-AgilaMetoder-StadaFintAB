@@ -5,41 +5,30 @@
 
   <div class="login-page__section login-page__section--login">
     <h2>Sign in</h2>
+
+    <!-- CUSTOMER / EMPLOYEE TOGGLE -->
     <div class="loginNav">
       <a class="loginType {{#if customer}}loginType__chosen{{/if}}" href="/login">Customer</a>
       <a class="loginType {{#unless customer}}loginType__chosen{{/unless}}" href="/login/employee">Employee</a>
     </div>
 
     {{#if loginFailed}}
-      <span class="error">Incorrect username or password!</span>
+    <span class="error">Incorrect username or password!</span>
     {{/if}}
-    <form class="login-form" action="/login{{#unless customer}}/cleaner{{/unless}}" method="post">
 
+    <!-- LOGIN FORM -->
+    <form class="login-form" action="/login{{#unless customer}}/cleaner{{/unless}}" method="post">
       <div class="form-input">
         <label for="email" class="input-title">E-mail</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="E-mail"
-          required
-        />
+        <input type="email" name="email" id="email" placeholder="E-mail" required />
       </div>
       <div class="form-input">
         <label for="password" class="input-title">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          required
-        />
+        <input type="password" name="password" id="password" placeholder="Password" required />
       </div>
-
       <div class="register">
         <a href="/register">Don't have an account? Create one</a>
       </div>
-
       <input type="submit" class="form-btn" value="Sign in" />
     </form>
   </div>

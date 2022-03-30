@@ -1,11 +1,9 @@
 <div class="cleaner-wrapper">
-
+  <!-- SCHEDULE -->
   <h2>Scheduled cleanings</h2>
-
   <div class="cleaner-table">
     <table class="cleaner-styled">
       <thead>
-
         <tr>
           <th>Date</th>
           <th>Time</th>
@@ -15,21 +13,21 @@
       </thead>
       <tbody>
         {{#each cleanings}}
-          <tr>
-            <td>{{date}}</td>
-            <td>{{time}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.adress}}</td>
-          </tr>
+        <tr>
+          <td>{{date}}</td>
+          <td>{{time}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.adress}}</td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
   </div>
 
+  <!-- LOGOUT -->
   <div class="logout-div">
     <form action="/cleaner/log-out" method="post">
       <input type="submit" value="Log out" />
     </form>
   </div>
-
 </div>

@@ -3,6 +3,8 @@
     <div class="bookings-container">
         <h1 class="bookings-header">Book a cleaning</h1>
         <div class="bookings-content">
+
+            <!-- FORM -->
             <form action="/customer/book-cleaning" method="post" class="bookings-form">
                 {{#if errorMessage}}
                 <p class="error-message">{{errorMessage}}</p>
@@ -26,17 +28,8 @@
                         <label for="time2">15:00 PM – 18:00 PM</label>
                     </div>
                 </section>
-                
-            
-    <input type="submit" value="Check availability">
+                <input type="submit" value="Check availability">
             </form>
-           
-
         </div>
-
-      
-  
-        
-               
     </div>
 </main>

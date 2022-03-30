@@ -9,63 +9,25 @@
     {{#if error}}
     <p class="error">{{error}}</p>
     {{/if}}
+
+    <!-- REGISTER FORM -->
     <form action="/register" method="post">
       <div>
         <div>
           <label for="email">E-mail</label>
-          <input
-            type="text"
-            placeholder="E-mail"
-            name="email"
-            id="email"
-            required
-          />
-
+          <input type="text" placeholder="E-mail" name="email" id="email" required />
           <label for="password">Password</label>
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            id="password"
-            required
-          />
-
+          <input type="password" placeholder="Password" name="password" id="password" required />
           <label for="confirmPassword">Repeat password</label>
-          <input
-            type="password"
-            placeholder="Repeat password"
-            name="confirmPassword"
-            id="confirmPassword"
-            required
-          />
+          <input type="password" placeholder="Repeat password" name="confirmPassword" id="confirmPassword" required />
         </div>
         <div>
           <label for="name">Name</label>
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            id="name"
-            required
-          />
-
+          <input type="text" placeholder="Name" name="name" id="name" required />
           <label for="adress">Adress</label>
-          <input
-            type="text"
-            placeholder="Adress"
-            name="adress"
-            id="adress"
-            required
-          />
-
+          <input type="text" placeholder="Adress" name="adress" id="adress" required />
           <label for="phone">Phone</label>
-          <input
-            type="tel"
-            placeholder="Phone"
-            name="phone"
-            id="phone"
-            required
-          />
+          <input type="tel" placeholder="Phone" name="phone" id="phone" required />
         </div>
       </div>
       <div class="login-link">

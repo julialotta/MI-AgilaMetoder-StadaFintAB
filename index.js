@@ -1,6 +1,8 @@
+//////////////////////
+// REQUIRES + SETUP //
+//////////////////////
 require("dotenv").config();
 require("./mongoose.js");
-
 const express = require("express");
 const exphbs = require("express-handlebars");
 const loginRouter = require("./routes/login-routes");
@@ -10,8 +12,6 @@ const registerroutes = require("./routes/register-routes.js");
 const adminRoute = require("./routes/admin-routes.js");
 const cleanerRoute = require("./routes/cleaner-route.js");
 const jwt = require("jsonwebtoken");
-const req = require("express/lib/request");
-
 const app = express();
 
 app.engine(
@@ -64,9 +64,9 @@ app.use("/register", registerroutes);
 app.use("/cleaner", cleanerRoute);
 app.use("/admin", adminRoute);
 
-/////////////
-//  ERROR //
-///////////
+/////////////////
+// ERROR PAGES //
+/////////////////
 
 app.use("/unauthorized", (req, res) => {
   res.status(403).render("errors/unauthorized");
