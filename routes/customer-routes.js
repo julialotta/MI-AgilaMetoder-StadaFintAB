@@ -37,8 +37,17 @@ router.get("/mypage", async (req, res) => {
 
 // DELETE A BOOKING FROM SCHEDULED-CLEANINGS //
 router.get("/:id/remove", async (req, res) => {
-  await BookingsModel.findById(req.params.id).deleteOne();
-  res.redirect("/customer/mypage");
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.userId || tokenData.admin) {
+    res.redirect("/unauthorized");
+  } else{
+    await BookingsModel.findById(req.params.id).deleteOne();
+    res.redirect("/customer/mypage");
+  }
 });
 
 // GET - MY-ACCOUNT FOR CUSTOMER //

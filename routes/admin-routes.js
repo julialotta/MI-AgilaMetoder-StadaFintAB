@@ -3,47 +3,77 @@ const router = express.Router();
 const UsersModel = require("../models/UsersModel.js");
 const CleanersModel = require("../models/CleanersModel.js");
 const BookingsModel = require("../models/BookingsModel.js");
+const jwt = require("jsonwebtoken");
 const utils = require("../utils");
 
 //hämta alla users/customers och rendera i selecion list
 router.get("/customers", async (req, res) => {
-  const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
-  res.render("admin/admin-clients", { allCustomers });
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  } else {
+    const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
+    res.render("admin/admin-clients", { allCustomers });
+  }
 });
 
 //hämta och ge ID i urlen
 router.get("/customers/:id", async (req, res) => {
-  const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  for (let i = 0; i < allCustomers.length; i++) {
-    if (req.params.id == allCustomers[i]._id) {
-      const selectedUser = allCustomers[i]._id;
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  } else {
+    const allCustomers = await UsersModel.find({ admin: { $ne: true } }).lean();
 
-      const bookingInfo = await BookingsModel.find({
-        user: selectedUser,
-      })
-        .populate("cleaner")
-        .lean();
+    for (let i = 0; i < allCustomers.length; i++) {
+      if (req.params.id == allCustomers[i]._id) {
+        const selectedUser = allCustomers[i]._id;
 
-      const userInfo = await UsersModel.findById({ _id: selectedUser }).lean();
+        const bookingInfo = await BookingsModel.find({
+          user: selectedUser,
+        })
+          .populate("cleaner")
+          .lean();
 
-      res.render("admin/admin-clients", {
-        allCustomers,
-        bookingInfo,
-        userInfo,
-      });
+        const userInfo = await UsersModel.findById({
+          _id: selectedUser,
+        }).lean();
+
+        res.render("admin/admin-clients", {
+          allCustomers,
+          bookingInfo,
+          userInfo,
+        });
+      }
     }
   }
 });
 
 //radera en bokning
 router.get("/:id/deletebooking", async (req, res) => {
-  const booking = await BookingsModel.findById(req.params.id);
-  const user = booking.user;
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  await BookingsModel.findById(req.params.id).deleteOne();
-
-  res.redirect("/admin/customers/" + user);
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    const booking = await BookingsModel.findById(req.params.id);
+    const user = booking.user;
+  
+    await BookingsModel.findById(req.params.id).deleteOne();
+  
+    res.redirect("/admin/customers/" + user);
+  }
 });
 
 //edit ett konto
@@ -60,11 +90,20 @@ router.get("/:id/deleteaccount", async (req, res) => {
 // READ – Admin employee page
 
 router.get("/employees", async (req, res) => {
-  const employees = await CleanersModel.find().lean();
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  res.render("admin/admin-employees", {
-    employees,
-  });
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    const employees = await CleanersModel.find().lean();
+  
+    res.render("admin/admin-employees", {
+      employees,
+    });
+  }
 });
 
 // POST – Search for employee i select list
@@ -95,11 +134,20 @@ router.post("/employees", async (req, res) => {
 // READ – Create employee account
 
 router.get("/employee/create", async (req, res) => {
-  const employees = await CleanersModel.find().lean();
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  res.render("admin/admin-employee-create", {
-    employees,
-  });
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    const employees = await CleanersModel.find().lean();
+  
+    res.render("admin/admin-employee-create", {
+      employees,
+    });
+  }
 });
 
 // POST – Create employee account
@@ -125,16 +173,25 @@ router.post("/employee/:id/delete", async (req, res) => {
 
 // Cancel booking
 router.get("/bookings/:id/cancel", async (req, res) => {
-  await BookingsModel.findById(req.params.id).deleteOne();
-  res.redirect("/admin/employees");
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
+
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  }else{
+    await BookingsModel.findById(req.params.id).deleteOne();
+    res.redirect("/admin/employees");
+  }
 });
 
 // Logout
 router.get("/logout", async (req, res) => {
   res.cookie("token", " ", {
-    maxAge: 0
+    maxAge: 0,
   });
   res.redirect("/");
-})
+});
 
 module.exports = router;
