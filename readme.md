@@ -6,10 +6,10 @@ Cleaning business booking app where customers, employees and admin can sign in a
 
 ## Installation
 1. Clone the repo\
-git clone https://github.com/julialotta/MI-AgilaMetoder-StadaFintAB
+`git clone https://github.com/julialotta/MI-AgilaMetoder-StadaFintAB`
 
 2. Install npm packages\
-npm install
+`npm install`
 
 3. Create a .env\
 To run this application you need the following two things in a .env file:\
@@ -17,7 +17,7 @@ CONNECTION_STRING=""\
 JWTSECRET=""
 
 4. Run Nodemon\
-nodemon
+`nodemon`
 
 Visit localhost:8000 to view the project
 
