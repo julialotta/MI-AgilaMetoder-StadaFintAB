@@ -75,7 +75,7 @@
 
   .customer-admin-table {
     @include mixins.flex(column, center, center);
-    width: 90%;
+    width: 95%;
 
     @include for-tablet-landscape-up {
       width: 70%;
