@@ -142,24 +142,32 @@ router.get("/employees/:id", async (req, res) => {
   const employees = await CleanersModel.find().lean();
   const specificEmployee = await CleanersModel.findById(req.params.id).lean();
   const employeeName = specificEmployee.name;
+  const { token } = req.cookies;
+  const tokenData = jwt.decode(token, process.env.JWTSECRET);
 
-  for (let i = 0; i < employees.length; i++) {
-    if (req.params.id == employees[i]._id) {
-      let selectedEmployee = employees[i]._id;
-
-      const bookings = await BookingsModel.find({
-          cleaner: selectedEmployee,
-        })
-        .populate("user")
-        .populate("cleaner")
-        .lean();
-
-      res.render("admin/admin-employees", {
-        employees,
-        selectedEmployee,
-        bookings,
-        employeeName
-      });
+  if (tokenData == null) {
+    res.redirect("/login");
+  } else if (!tokenData.admin) {
+    res.redirect("/unauthorized");
+  } else {
+    for (let i = 0; i < employees.length; i++) {
+      if (req.params.id == employees[i]._id) {
+        let selectedEmployee = employees[i]._id;
+  
+        const bookings = await BookingsModel.find({
+            cleaner: selectedEmployee,
+          })
+          .populate("user")
+          .populate("cleaner")
+          .lean();
+  
+        res.render("admin/admin-employees", {
+          employees,
+          selectedEmployee,
+          bookings,
+          employeeName
+        });
+      }
     }
   }
 });
