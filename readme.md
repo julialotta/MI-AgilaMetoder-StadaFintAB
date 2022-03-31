@@ -19,6 +19,9 @@ JWTSECRET=""
 4. Run Nodemon\
 `nodemon`
 
+5. Run Sass\
+`npn run sass`
+
 Visit localhost:8000 to view the project
 
 ## Built with
