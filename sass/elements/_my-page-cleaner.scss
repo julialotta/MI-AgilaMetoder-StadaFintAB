@@ -1,0 +1,47 @@
+@use "../mixins";
+
+.cleaner-wrapper {
+  @include mixins.flex(column, center, center);
+
+  h2 {
+    font-family: $fat-font;
+    font-size: 1.3em;
+    padding-top: 70px;
+  }
+
+  .cleaner-table {
+    @include mixins.flex(column, center, center);
+    .cleaner-styled {
+      width: 120%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      margin-top: 30px;
+      @include mixins.for-tablet-landscape-up {
+        width: 190%;
+      }
+
+      thead > tr {
+        text-align: left;
+      }
+      thead > tr > th {
+        font-family: $fat-font;
+        padding-bottom: 25px;
+        text-align: center;
+      }
+      tbody > tr {
+        border-bottom: 1px solid $grey;
+      }
+      tbody > tr > td {
+        font-family: $skinny-font;
+        font-size: 0.7em;
+        padding: 10px 0;
+        text-align: center;
+      }
+    }
+  }
+  .logout-div {
+    form > input {
+      @include mixins.btn(100, 10px, 50);
+    }
+  }
+}

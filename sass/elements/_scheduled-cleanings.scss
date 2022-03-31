@@ -1,0 +1,79 @@
+@use "../mixins";
+
+.customer-wrapper {
+  @include mixins.flex(column, center, center);
+  .customer-headlines {
+    display: flex;
+    gap: 70px;
+    padding-bottom: 80px;
+    .scheduledCleanings {
+      font-family: $fat-font;
+      border-bottom: 1.7px solid $red;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+    h2 {
+      font-family: $fat-font;
+      font-size: 1.3em;
+      padding-top: 40px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+
+  .customer-table {
+    width: 300px;
+    .customer-styled {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      margin-top: 21px;
+      font-size: 1em;
+      thead > tr {
+        text-align: left;
+      }
+      thead > tr > th {
+        font-family: $fat-font;
+        padding-left: 15px;
+        padding-bottom: 15px;
+        width: 25%;
+      }
+      tbody > tr {
+        border-bottom: 1px solid $grey;
+      }
+      tbody > tr > td {
+        font-family: $skinny-font;
+        font-size: 0.75em;
+        padding: 15px;
+        width: 25%;
+      }
+      tbody > tr > td > .cancelBtn {
+        @include mixins.btn(90, 6px, 40);
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+    }
+  }
+
+  h2 {
+    font-family: $fat-font;
+    font-size: 1.5em;
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .customer-wrapper {
+    .customer-table {
+      width: 638px;
+      .customer-styled {
+        font-size: 1.2em;
+      }
+    }
+  }
+}

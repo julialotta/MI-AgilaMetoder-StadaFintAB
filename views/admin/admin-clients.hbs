@@ -1,0 +1,80 @@
+{{>adminHeaderCustomers}}
+<div class="customer-admin-wrapper">
+
+  <!-- HEADLINES -->
+  <div class="admin-headlines">
+    <h2 class="customers"><a href="/admin/customers">Customers</a> </h2>
+    <h2><a href="/admin/employees">
+        Employees</a></h2>
+  </div>
+  <h3>Customer</h3>
+
+  <!-- FORM -->
+  <form>
+    <select name="selectedList" id="selectedList" value="Choose"
+      onchange="document.location.href = '/admin/customers/' + this.value">
+      <option value="" disabled selected hidden>{{userInfo.name}}</option>
+      {{#each allCustomers}}
+
+      <option value="{{_id}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </form>
+
+  <!-- SCHEDULE -->
+  {{#if userInfo}}
+  <h3>Schedule</h3>
+  {{#if bookingInfo}}
+    <div class="customer-admin-table">
+      <table class="customer-admin-styled">
+        <thead>
+          <tr>
+            <th>Cleaner</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each bookingInfo}}
+            <tr>
+              <td>{{cleaner.name}}</td>
+              <td>{{date}}</td>
+              <td>{{time}}</td>
+              <td><a
+                  href="/admin/{{_id}}/deletebooking"
+                  class="cancelBtn"
+                >Cancel</a></td>
+            </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+
+  {{else}}
+  <h4 class="no-bookings-placeholder">No bookings available</h4>
+  {{/if}}
+
+  <!-- CUSTOMER DETAILS -->
+  <h3>Information</h3>
+
+  <form action="/admin/customers/{{userInfo._id}}/edit" method="post">
+
+    <div class="customer-admin-details">
+      <div>
+        <input type="text" name="name" value="{{userInfo.name}}">
+        <input type="text" name="adress" value="{{userInfo.adress}}">
+      </div>
+      <div>
+        <input type="text" name="email" value="{{userInfo.email}}">
+        <input type="text" name="phone" value="{{userInfo.phone}}">
+      </div>
+    </div>
+    <input class="editBtn" type="submit" value="Edit account">
+  </form>
+  <a href="/admin/{{userInfo._id}}/deleteaccount" class="deleteBtn">Delete
+    account</a>
+  {{else}}
+  {{/if}}
+</div>

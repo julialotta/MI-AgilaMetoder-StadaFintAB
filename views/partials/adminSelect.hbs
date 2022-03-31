@@ -1,0 +1,18 @@
+<!-- SELECT LIST FOR ADMIN/EMPLOYEE PAGE -->
+<form action="/admin/employees" method="post">
+    <select name="employee" id="employee" onchange="document.location.href = '/admin/employees/' + this.value">
+        {{#if employeeName}}
+        <option value="" selected>{{employeeName}}</option>
+        {{#each employees}}
+        <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+
+        {{else}}
+        <option value="" disabled selected>Select employee</option>
+        {{#each employees}}
+        <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+
+        {{/if}}
+    </select>
+</form>

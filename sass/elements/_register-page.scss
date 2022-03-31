@@ -1,0 +1,106 @@
+@use "../mixins";
+
+.registerPage {
+  @include mixins.flex(column, start, center);
+  background-color: $lightgrey;
+  min-height: 100vh;
+
+  ///////////////
+  // SECTIONS //
+  /////////////
+  &__section {
+    ///////////////////
+    // LOGO SECTION //
+    /////////////////
+
+    &--logo {
+      user-select: none;
+      margin: 40px;
+      width: clamp(150px, 35vw, 180px);
+      .clean-logo {
+        content: url("../assets/cleaninc-logo.svg");
+        width: 100%;
+        height: fit-content;
+      }
+    }
+
+    &--form {
+      @include mixins.flex(column, start, center, 1.2rem);
+      width: 85%;
+      min-height: 65vh;
+      border: 1.2px solid lightgray;
+      border-radius: 6px;
+      background-color: white;
+
+      @include mixins.for-tablet-landscape-up {
+        max-width: 450px;
+      }
+      h2 {
+        font-family: $fat-font;
+        padding-top: 20px;
+      }
+
+      form {
+        @include mixins.flex(column, center, center);
+        label {
+          font-family: $fat-font;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+        input {
+          font-size: 14px;
+          border: none;
+          border-bottom: 1.2px solid $grey;
+          font-family: $skinny-font;
+          padding: 3px;
+          margin: 10px 0;
+        }
+        ::placeholder {
+          color: $grey;
+          font-family: $skinny-font;
+        }
+
+        > div {
+          @include mixins.flex(column, center, center);
+          margin: 5px 0 40px 0;
+
+          @include for-phone-landscape-up {
+            @include mixins.flex(row, center, center);
+          }
+
+          > div {
+            font-family: $skinny-font;
+            margin: 0 30px;
+            @include mixins.flex(column, center, start);
+          }
+        }
+      }
+
+      .error {
+        font-family: $skinny-font;
+        font-size: 0.8rem;
+        color: rgb(152, 17, 17);
+        background-color: #f9e4e3;
+        padding: 5px;
+        border-radius: 3px;
+      }
+
+      .login-link {
+        width: 180px;
+        text-align: center;
+        font-size: 0.85rem;
+        margin: 20px;
+
+        a {
+          font-family: $skinny-font;
+          color: $grey;
+          text-decoration: none;
+        }
+      }
+
+      .register-btn {
+        @include mixins.btn(120px, 12px, 35px);
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@use "../mixins";
+
+.account-wrapper {
+  @include mixins.flex(column, center, center);
+
+  .account-headlines {
+    display: flex;
+    gap: 70px;
+    padding-bottom: 80px;
+    h2 {
+      font-family: $fat-font;
+      font-size: 1.3em;
+      padding-top: 40px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    .myaccount {
+      font-family: $fat-font;
+      border-bottom: 1.7px solid $red;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+
+  .account-details {
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+    @include for-tablet-landscape-up {
+      width: 500px;
+    }
+
+    .mail-name {
+      div > h4 {
+        font-family: $fat-font;
+        font-size: 0.9em;
+        margin: 0px;
+        padding-top: 20px;
+
+        @include for-tablet-landscape-up {
+          font-size: 1em;
+        }
+      }
+      div > p {
+        font-family: $fat-font;
+        font-size: 1.1em;
+        margin: 0px;
+        padding: 0px;
+        @include for-tablet-landscape-up {
+          font-size: 1.3em;
+        }
+      }
+    }
+
+    .adress-phone {
+      div > h4 {
+        font-family: $fat-font;
+        font-size: 0.9em;
+        margin: 0px;
+        padding-top: 20px;
+        @include for-tablet-landscape-up {
+          font-size: 1em;
+        }
+      }
+      div > p {
+        font-family: $fat-font;
+        font-size: 1.1em;
+        margin: 0px;
+        padding: 0px;
+        @include for-tablet-landscape-up {
+          font-size: 1.3em;
+        }
+      }
+    }
+  }
+
+  .logout-div {
+    padding-top: 100px;
+    form > input {
+      @include mixins.btn(300, 10px, 50);
+    }
+  }
+}
+
+@include mixins.for-tablet-landscape-up {
+  .account-details {
+    gap: 70px;
+  }
+}

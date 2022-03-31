@@ -1,0 +1,41 @@
+<div class="cleaner-wrapper">
+  <!-- SCHEDULE -->
+  <h2>Scheduled cleanings</h2>
+  <div class="cleaner-table">
+    <table class="cleaner-styled">
+        {{#if cleanings}}
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Location</th>
+          <th>Date</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+          {{#each cleanings}}
+            <tr>
+              <td>{{user.name}}</td>
+              <td>{{user.adress}}</td>
+              <td>{{date}}</td>
+              <td>{{time}}</td>
+            </tr>
+          {{/each}}
+        {{else}}
+        <thead>
+          <tr>
+            <th>No bookings</th>
+          </tr>
+        </thead>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LOGOUT -->
+  <div class="logout-div">
+    <form action="/cleaner/log-out" method="post">
+      <input type="submit" value="Log out" />
+    </form>
+  </div>
+</div>

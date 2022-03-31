@@ -1,0 +1,51 @@
+{{>adminHeaderEmployees}}
+<div class="customer-admin-wrapper">
+    <div class="admin-headlines">
+        <h2><a href="/admin/customers">Customers</a> </h2>
+        <h2 class="employees"><a href="/admin/employees">
+                Employees</a></h2>
+    </div>
+
+    <h3>Employee</h3>
+    <div class="employee-header">
+        {{> adminSelect}}
+        <span class="create-account"><a href="/admin/employee/create">Create new account +</a></span>
+    </div>
+
+    <!-- SCHEDULE -->
+    {{#if selectedEmployee}}
+    <h3>Schedule</h3>
+    <div class="customer-admin-table">
+        {{#if bookings}}
+        <table class="customer-admin-styled">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each bookings}}
+                <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.adress}}</td>
+                    <td>{{date}}</td>
+                    <td>{{time}}</td>
+                    <td><a href="/admin/bookings/{{_id}}/{{cleaner._id}}/cancel" class="cancelBtn">Cancel</a></td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <!-- PLACEHOLDER IS SCHEDULE IS EMPTY -->
+                <p class="no-bookings-placeholder">No bookings available.</p>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- DELETE ACCOUNT -->
+    <form action="/employee/{{selectedEmployee}}/delete" method="post">
+        <input type="submit" value="Delete account" class="deleteBtn" />
+    </form>
+    {{/if}}
